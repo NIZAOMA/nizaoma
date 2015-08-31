@@ -1,0 +1,184 @@
+﻿@model NOTKNOW.Controllers.SearchTopicModel
+@{
+    ViewBag.Title = "topicSearch";
+}
+
+<html lang="zh-CN" dropeffect="none" class="js no-touch cssgradients no-mobile">
+<head>
+    <meta charset="utf-8">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="renderer" content="webkit">
+
+    <title>话题搜索结果 - 你造嘛</title>
+
+    <meta name="apple-itunes-app" content="app-id=432274380">
+
+
+
+
+    <meta http-equiv="mobile-agent" content="format=html5;url=http://www.zhihu.com/search">
+    <meta id="znonce" name="znonce" content="4f3a648f88a94a28b5d4773c87819518">
+    <link rel="apple-touch-icon-precomposed" href="http://static.zhihu.com/static/img/ios/zhihu(57px).png">
+    <link rel="apple-touch-icon-precomposed" href="http://static.zhihu.com/static/img/ios/zhihu(72px).png" sizes="72x72">
+    <link rel="apple-touch-icon-precomposed" href="http://static.zhihu.com/static/img/ios/zhihu(76px).png" sizes="76x76">
+    <link rel="apple-touch-icon-precomposed" href="http://static.zhihu.com/static/img/ios/zhihu(114px).png" sizes="114x114">
+    <link rel="apple-touch-icon-precomposed" href="http://static.zhihu.com/static/img/ios/zhihu(120px).png" sizes="120x120">
+    <link rel="apple-touch-icon-precomposed" href="http://static.zhihu.com/static/img/ios/zhihu(152px).png" sizes="152x152">
+
+
+    <link rel="shortcut icon" href="http://static.zhihu.com/static/favicon.ico" type="image/x-icon">
+
+    <link rel="search" type="application/opensearchdescription+xml" href="http://static.zhihu.com/static/search.xml" title="知乎">
+    <link rel="stylesheet" href="/Content/CSS/people-index.css">
+    <link rel="stylesheet" href="/Content/CSS/topview.css">
+
+
+
+    <!--[if lt IE 9]>
+<script src="http://static.zhihu.com/static/components/respond/dest/respond.min.js"></script>
+<link href="http://static.zhihu.com/static/components/respond/cross-domain/respond-proxy.html" id="respond-proxy" rel="respond-proxy" />
+<link href="/static/components/respond/cross-domain/respond.proxy.gif" id="respond-redirect" rel="respond-redirect" />
+<script src="/static/components/respond/cross-domain/respond.proxy.js"></script>
+<![endif]-->
+
+    <script async="" src="//www.google-analytics.com/analytics.js"></script>
+    <script type="text/javascript" async="" src="http://www.google-analytics.com/ga.js"></script>
+    <script src="http://static.zhihu.com/static/ver/c18693016ee175f69ca64d8aac8f8d2b.instant.min.js"></script>
+
+    <style type="text/css">
+        .zm-search-result-topic-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 3px;
+        }
+
+        .zm-search-result-topic-wrap-inner {
+            margin-left: 62px;
+            min-height: 0;
+        }
+
+        .zm-search-result-topic-wrap {
+            margin-top: 15px;
+            border: 2px solid #eee;
+        }
+
+        .zm-side-section + .zm-side-section {
+            margin: 15px 0 0 0;
+        }
+
+            .zm-side-section + .zm-side-section > .zm-side-section-inner {
+                padding: 15px 0 0 0;
+            }
+    </style>
+
+</head>
+
+<body class="zhi">
+    @Html.Action("topView", "index");
+
+    <div class="zu-global-notify" id="zh-global-message" style="display: none">
+        <div class="zg-wrap">
+            <div class="zu-global-nitify-inner">
+                <a class="zu-global-notify-close" href="javascript:;" title="关闭" name="close">x</a>
+                <span class="zu-global-notify-icon"></span>
+                <span class="zu-global-notify-msg"></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="zg-wrap zu-main" role="main">
+        <div class="zu-main-content">
+            <div class="zu-main-content-inner">
+
+
+
+
+                <div class="zm-search3-tabs">
+                    <a href="/search/questionSearch?q=@ViewBag.searchContent">问题</a><a href="/search/userSearch?q=@ViewBag.searchContent">成员</a><a href="/search/topicSearch?q=@ViewBag.searchContent" class="current">话题</a>
+                </div>
+
+                <div class="zm-search3-results" id="zh-search3-list" data-type="topic">
+                    <div class="zh-general-list clearfix" data-init="{&quot;params&quot;: {&quot;query&quot;: &quot;\u6e05\u534e&quot;, &quot;type&quot;: &quot;topic&quot;, &quot;limit&quot;: 20, &quot;offset&quot;: 0}, &quot;nodename&quot;: &quot;Search3ResultListV2&quot;}">
+                        @for (int i = 0; i < Model.topic.Count(); i++)
+                        {
+                            for (int j = 0; j < Model.topic[i].Count(); j++)
+                            {
+                            <div class="zm-search3-item user" data-index="@i*@Model.topic.Count()+@j">
+                                <a href="/topic/questions/@Model.topic[i][j].TID" class="zg-left" target="_blank">
+                                    <img class="user-avatar zm-list-avatar-medium zg-r3px" src="@Model.topic[i][j].TPhoto">
+                                </a>
+                                <div class="user-info">
+                                    <a href="/topic/questions/@Model.topic[i][j].TID" class="user-name" target="_blank">@Model.topic[i][j].TContent</a>
+
+                                    <div class="user-bio">@Model.topic[i][j].TDescription</div>
+                                    <div class="meta">
+                                        @if (Model.topic[i][j].QuestionNum != 0)
+                                        {
+                                        <a href="/topic/questions/@Model.topic[i][j].TID" class="answer zg-gray-normal" target="_blank"><i></i>@Model.topic[i][j].QuestionNum 个问题</a>
+                                        }
+                                        else
+                                        {
+                                        <a href="/topic/questions/@Model.topic[i][j].TID" class="answer zg-gray-normal" target="_blank"><i></i>没有问题</a>
+                                        }
+                                        <a class="follow zg-gray-normal" target="_blank"><i></i>@Model.topic[i][j].TFollowerNum 人关注</a>
+                                    </div>
+                                </div>
+
+                            </div>
+                            }
+                        }
+
+                        </div>
+                </div>
+            </div>
+        </div>
+        <div class="zu-main-sidebar">
+                            <div class="zm-side-section" style="margin-top: 33px">
+<div class="zm-side-section-inner" style ="border-top: 2px solid #eee; padding-top: 10px; margin-bottom: -15px;">
+<a class="zm-search3-side-title people" href="/search/questionSearch?q=@ViewBag.searchContent">查看更多问题搜索结果<i class="zg-icon"></i></a>
+</div>
+</div>
+
+
+<div class="zm-side-section">
+<div class="zm-side-section-inner" style ="border-top: 0px solid #eee; border-bottom: 2px solid #eee; padding-bottom: 10px;">
+<a class="zm-search3-side-title topic" href="/search/userSearch?q=@ViewBag.searchContent">查看更多成员搜索结果<i class="zg-icon"></i></a>
+</div>
+</div>
+                        </div>
+    </div>
+               
+
+
+                        <script type="text/json" class="json-inline" data-name="current_user">["\u5c0f\u7b28\u86cb","xiao-ben-dan-11-72","http:\/\/pic1.zhimg.com\/2ccd1dbc0_s.jpg","3d1fff2b93afca8839b1a9424e52e509","\u592a\u7b28",1,0,1,"slf12thuss@163.com","http:\/\/mail.163.com",1,true,false]</script>
+                        <script type="text/json" class="json-inline" data-name="env">["zhihu.com","comet.zhihu.com",false,null]</script>
+                        <script type="text/json" class="json-inline" data-name="permissions">[]</script>
+
+
+                        <script type="text/json" class="json-inline" data-name="ga_vars">{"user_created":1405756277000,"now":1406531973000,"abtest_mask":"---------0--------------------","user_attr":[1,0,0,"-",1],"user_hash":"3d1fff2b93afca8839b1a9424e52e509"}</script>
+
+
+                        <script src="http://static.zhihu.com/static/ver/be1f4e09e99650d8ff09ac81943bc61f.extern_src.min.js"></script>
+                        <script src="http://static.zhihu.com/static/ver/0697483e2ab1a23857dd2b0197e41827.app_core.js"></script>
+                        <script src="http://static.zhihu.com/static/ver/f9e164926a90bbc3e832c7bef28fe05d.sign.js"></script>
+                        <script src="http://static.zhihu.com/static/ver/2bc515676ae90064a8f05acf3167b130.app.js"></script>
+                        <script src="http://static.zhihu.com/static/ver/286bd6f805a8fe20da98e7c2e09276f3.rich_text_editor.js"></script>
+                        <script src="~/Scripts/topview.js"></script>
+                        <script type="text/zscript" znonce="4f3a648f88a94a28b5d4773c87819518">
+ZH.entryM();
+                        </script>
+
+                        <input type="hidden" name="_xsrf" value="ed44e2a09de74440a5bda3f97ac5cefa">
+
+                        <div class="zh-backtotop" style="display: none">
+                            <a data-action="backtotop" data-tip="s$r$回到顶部" href="javascript:;" class="btn-backtotop btn-action">
+                                <div class="arrow"></div>
+                                <div class="stick"></div>
+                            </a>
+                        </div>
+                        <div id="zh-tooltip"></div>
+                        <div id="zh-global-spinner" style="display: none;">加载中…</div>
+<div style="left:200px;position:relative;">@Html.Partial("footer")</div>
+</body>
+</html>

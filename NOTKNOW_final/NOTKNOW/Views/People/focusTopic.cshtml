@@ -1,0 +1,338 @@
+﻿@model NOTKNOW.Controllers.UserModel
+@{
+    ViewBag.Title = "ask";
+}
+
+@section head{
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryval")
+    <meta charset="utf-8" />
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="renderer" content="webkit" />
+
+    <title>我的关注 - 你造嘛</title>
+
+    <meta name="apple-itunes-app" content="app-id=432274380, app-argument=zhihu://people/zzzz-zzzz-51">
+
+
+
+
+    <meta http-equiv="mobile-agent" content="format=html5;url=http://www.zhihu.com/people/zzzz-zzzz-51">
+    <meta id="znonce" name="znonce" content="4dce59898e8b4dabbe82f031961fdaec">
+    <link rel="apple-touch-icon-precomposed" href="http://static.zhihu.com/static/img/ios/zhihu(57px).png" />
+    <link rel="apple-touch-icon-precomposed" href="http://static.zhihu.com/static/img/ios/zhihu(72px).png" sizes="72x72" />
+    <link rel="apple-touch-icon-precomposed" href="http://static.zhihu.com/static/img/ios/zhihu(76px).png" sizes="76x76" />
+    <link rel="apple-touch-icon-precomposed" href="http://static.zhihu.com/static/img/ios/zhihu(114px).png" sizes="114x114" />
+    <link rel="apple-touch-icon-precomposed" href="http://static.zhihu.com/static/img/ios/zhihu(120px).png" sizes="120x120" />
+    <link rel="apple-touch-icon-precomposed" href="http://static.zhihu.com/static/img/ios/zhihu(152px).png" sizes="152x152" />
+     <link rel="stylesheet" href="~/content/CSS/topview.css">
+
+    <link rel="shortcut icon" href="http://static.zhihu.com/static/favicon.ico" type="image/x-icon">
+
+    <link rel="search" type="application/opensearchdescription+xml" href="http://static.zhihu.com/static/search.xml" title="你造嘛" />
+    <link rel="stylesheet" href="~/content/CSS/people-index.css">
+
+
+
+    <!--[if lt IE 9]>
+<script src="http://static.zhihu.com/static/components/respond/dest/respond.min.js"></script>
+<link href="http://static.zhihu.com/static/components/respond/cross-domain/respond-proxy.html" id="respond-proxy" rel="respond-proxy" />
+<link href="/static/components/respond/cross-domain/respond.proxy.gif" id="respond-redirect" rel="respond-redirect" />
+<script src="/static/components/respond/cross-domain/respond.proxy.js"></script>
+<![endif]-->
+
+    <script src="http://static.zhihu.com/static/ver/c18693016ee175f69ca64d8aac8f8d2b.instant.min.js"></script>
+
+    <style>
+        .zm-profile-section-head {
+            padding: 0;
+        }
+
+        .zm-item-top-container {
+            display: none;
+        }
+
+        .zm-profile-section-head .goog-menu {
+            display: none;
+            !important;
+        }
+    </style>
+
+}
+
+<body class="zhi">
+@Html.Action("topView", "index");
+    <!--  <div class="zu-global-notify zu-global-notify-info" id="zh-global-notify">
+        <div class="zg-wrap">
+            <div class="zu-global-nitify-inner">
+                <span class="zu-global-notify-icon"></span>
+                欢迎！为正常使用你造嘛，请激活您的邮箱：
+
+                <a href="http://mail.163.com" target="_blank">@Model.myUser.UEmail</a>
+                <a href="javascript:;" data-activate-dialog="resendEmail">重发激活邮件</a>
+                <a href="/settings/account" data-activate-dialog="changeEmail"><i class="zg-icon zg-icon-edit-button-blue"></i>修改</a>
+            </div>
+        </div>
+    </div>
+      -->
+    <div class="zg-wrap zu-main">
+        <div class="zu-main-content">
+            <div class="zu-main-content-inner" id="zh-pm-page-wrap">
+
+
+
+                <div class="zm-profile-header">
+                    <div class="zm-profile-header-main">
+                        <div class="top">
+
+                            <div class='weibo-wrap'>
+                            </div>
+
+                            <div class="title-section ellipsis">
+
+                                <span class="name">@Model.myUser.UName</span>
+                            </div>
+                        </div>
+                        <div class="body clearfix">
+                            <div class="zm-profile-header-avatar-container self">
+                                <img alt="@Model.myUser.UName" src=@Model.myUser.UPhoto
+class="zm-profile-header-img zg-avatar-big zm-avatar-editor-preview"/>
+
+                                <!--     <span class="zm-entry-head-avatar-edit-button">修改头像</span>-->
+
+                            </div>
+                            <div class="zm-profile-header-info">
+                                <div class="zm-profile-header-user-describe">
+                                    <div class="items">
+                                        <div class="item editable-group" data-name="location">
+
+                                            <i class="zg-icon location"></i>
+
+                                            <span class="info-wrap">
+
+                                                <span class="business item">@Model.myUser.UCareer</span>
+                                            </span>
+
+                                        </div>
+                                    </div>
+
+                                    <div class="zm-profile-header-description editable-group empty" data-name="description">
+                                        <span class="info-wrap fold-wrap fold disable-fold">
+                                            <span class="description unfold-item">
+                                                <span class="content"></span>
+                                                <a href="javascript:;" name="fold" class="fold collapse meta-item"><i class="z-icon-fold"></i>收起</a>
+                                            </span>
+                                            <span class="fold-item">
+                                                <span class="content"></span>
+                                                <a href="javascript:;" class="unfold" name="unfold">显示全部 »</a></span>
+
+                                        </span>
+                                        <span class='info-empty-wrap'><i class="zg-icon zg-icon-edit-button-blue"></i>个人简介</span>
+                                        <span class="edit-wrap">
+                                            <div class="zm-editable-editor-outer">
+                                                <div class="zm-editable-editor-inner" style="margin: 20px;">
+                                                 <p> @Model.myUser.UIntroduction</p>
+                                                </div>
+                                            </div>
+                             
+                                        </span>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="zm-profile-header-operation zg-clear  zm-profile-header-operation-myview">
+                        <div class="zm-profile-header-info-list">
+                            <span class="zm-profile-header-info-title">获得</span>
+                            <span class="zm-profile-header-user-agree"><span class="zm-profile-header-icon"></span><strong>@Model.myUser.UUpvoteNum</strong>赞同</span>
+                        </div>
+
+
+                        @if (ViewBag.user == "me")
+                        {
+                            <a class="zm-profile-header-user-edit zg-link-litblue-normal zg-right" href="/people/edit"><i class="zg-icon zg-icon-edit-button-blue"></i>编辑我的资料</a>
+                        }
+                        @if (ViewBag.user == "notme")
+                        {
+                            if (ViewBag.focus == "focus")
+                            {
+                            <a data-ajax="true" style="display:block;width:100px;margin-left: 500px" class="unfollow-button zg-follow zg-btn-white"  
+     href="/follow/_followUser/@Model.myUser.UID">取消关注</a>
+                            <a data-ajax="true" style="display:none;width:60px;margin-left: 500px" class="follow-button zg-follow zg-btn-green"  
+     href="/follow/followUser/@Model.myUser.UID">关注</a>
+                            }
+                            else
+                            {
+                            <a data-ajax="true" style="display:none;width:100px;margin-left: 500px" class="unfollow-button zg-follow zg-btn-white"  
+     href="/follow/_followUser/@Model.myUser.UID">取消关注</a>
+                            <a data-ajax="true" style="display:block;width:60px;margin-left: 500px" class="follow-button zg-follow zg-btn-green"  
+     href="/follow/followUser/@Model.myUser.UID">关注</a>
+                            }
+                        }
+                    </div>
+                    <div class="profile-navbar clearfix">
+                        <a class="item "
+                            href="/people/_ask?email=@Model.myUser.UEmail">提问
+                            <span class="num">@Model.myUser.UQuestionNum</span>
+                        </a>
+                        <a class="item "
+                            href="/people/_answer?email=@Model.myUser.UEmail">回答
+                            <span class="num">@Model.myUser.UAnswerNum</span>
+                        </a>
+                        <!--<a class="item "
+href="/people/zzzz-zzzz-51/posts">
+专栏文章
+<span class="num">0</span>
+</a>-->
+                    
+                        <!--<a class="item "
+href="/people/zzzz-zzzz-51/logs">
+公共编辑
+<span class="num">0</span>
+</a>-->
+                    </div>
+
+                </div>
+
+<div class="zm-profile-section-wrap" style="
+    margin-bottom: 50px;
+">
+<div class="zm-profile-section-head">
+<span class="zm-profile-section-name" style="margin-left:20px;"><a href="/people/zi-se-feng-ling-67">
+    @Model.myUser.UName</a> 关注的话题（@Model.topics.Count()）</span>
+<a class="zg-right zg-link-litblue-normal zm-profile-answer-page-return" style="margin-right:20px;"
+    href="/people/_index?email=@Model.myUser.UEmail">返回个人主页</a>
+</div>
+<div class="zm-profile-section-list zm-profile-topics-page">
+<div id="zh-profile-topic-list">
+@foreach(var x in Model.topics)
+{
+<div class="zm-profile-section-item zg-clear zm-editable-status-normal" 
+    id="tpi-99" data-tid="ftid-99">
+<a class="zm-list-avatar-link" href="/topic/questions/@x.TID">
+<img class="zm-list-avatar-medium" src="@x.TPhoto">
+</a>
+<div class="zm-profile-section-main">
+
+
+<a data-ajax="true" style="display:block;width:100px;margin-left: 500px" 
+    class="zg-right zg-btn zg-btn-unfollow @x.TID" 
+     href="/follow/_followTopic/@x.TID">取消关注</a>
+<a data-ajax="true" style="display:none;width:60px;margin-left: 500px" 
+    class="zg-right zg-btn zg-btn-follow @x.TID"
+     href="/follow/followTopic/@x.TID">关注</a>
+@{
+   <script>
+       $(".zg-btn-follow.@x.TID").click(function () {
+           $(".zg-btn-follow.@x.TID").css("display", "none");
+           $(".zg-btn-unfollow.@x.TID").css("display", "block");
+    })
+       $(".zg-btn-unfollow.@x.TID").click(function () { 
+           $(".zg-btn-follow.@x.TID").css("display", "block")
+        $(".zg-btn-unfollow.@x.TID").css("display", "none")
+       })
+    </script>
+}
+<a href="/topic/questions/@x.TID" data-tip="t$t$19550517"><strong>@x.TContent</strong></a>
+<div class="zm-editable-tip"></div
+    ><div class="zm-editable-content" style="display: none;">
+        <a href="javascript:;" class="zu-edit-button" name="edit">
+            <i class="zu-edit-button-icon"></i>修改</a></div>
+
+</div>
+
+<div class="zm-item-top-container zg-clear">
+<a name="top" data-type="topic" data-id="99" data-tip="s$b$置顶这个话题" class="zm-item-top-btn zm-item-top-btn-top" href="javascript:void(0);">
+顶
+</a>
+<a name="cancel-top" data-type="topic" data-tip="s$b$取消置顶" data-id="99" class="zm-item-top-btn zm-item-top-btn-cancel" href="javascript:void(0);" style="display:none;">
+顶
+</a>
+</div>
+
+</div>
+}
+
+</div>
+<a href="javascript:;" id="zh-load-more" class="zg-btn-white zu-button-more" style="display:none">更多</a>
+</div>
+</div>
+
+            </div>
+        </div>
+        <div class="zu-main-sidebar">
+            <div class="zm-profile-side-following zg-clear">
+                <a class="item" href="">
+                    <span class="zg-gray-normal">关注了</span><br />
+                    <strong>@Model.myUser.UFollowingNum</strong><label> 人</label>
+                </a>
+                <a class="item" href="">
+                    <span class="zg-gray-normal">关注者</span><br />
+                    <strong>@Model.myUser.UFollowerNum</strong><label> 人</label>
+                </a>
+            </div>
+
+
+
+            <div class="zm-profile-side-section">
+                <div class="zm-side-section-inner zg-clear">
+                    <div class="zm-profile-side-section-title">
+                        关注了 <a href="/people/focusTopic?email=@Model.myUser.UEmail" class="zg-link-litblue"><strong>@Model.myUser.UFTopicNum </strong><strong>个话题</strong></a>
+                    </div>
+                    <div class="zm-profile-side-topics" id="zh-profile-following-topic">
+                    </div>
+                </div>
+            </div>
+
+            <div class="zm-profile-side-section">
+                <div class="zm-side-section-inner">
+                    <!--<span class="zg-gray-normal">个人主页被 <strong>1</strong> 人浏览</span>-->
+                </div>
+            </div>
+
+            <script type="text/json" class="json-inline" data-name="current_people">["zzzz zzzz","zzzz-zzzz-51","http:\/\/pic3.zhimg.com\/da8e974dc_s.jpg","cd6399291cae704620268538cbac9430"]</script>
+            <!--<div id="zh-footer" class="zh-footer">
+<div class="zg-wrap clearfix">
+<ul>
+
+<li><a href="/question/19581624" target='_blank'>你造嘛指南</a></li>
+<li><a href="javascript:;" id="js-feedback-button">建议反馈</a></li>
+
+<li><a href="/app" target='_blank'>移动应用</a></li>
+<li><a href="/read">你造嘛阅读</a></li>
+<li><a href="/jobs">加入你造嘛</a></li>
+<li><a href="/terms" target="_blank">你造嘛协议</a></li>
+</ul>
+<span class="copy">&copy; 2014 你造嘛</span>
+</div>
+</div>
+
+</div>
+<div class="zg-clear"></div>
+</div>-->
+
+
+            <script type="text/json" class="json-inline" data-name="current_user">["zzzz zzzz","zzzz-zzzz-51","http:\/\/pic2.zhimg.com\/da8e974dc_s.jpg","cd6399291cae704620268538cbac9430","",1,1,0,"z333@163.com","http:\/\/mail.163.com",1,true,false]</script>
+            <script type="text/json" class="json-inline" data-name="env">["zhihu.com","comet.zhihu.com",false,null]</script>
+            <script type="text/json" class="json-inline" data-name="permissions">[]</script>
+            <script src="/Scripts/topview.js"></script>
+
+            <script type="text/json" class="json-inline" data-name="ga_vars">{"user_created":1406083563000,"now":1406099384000,"abtest_mask":"---------0--------------------","user_attr":[1,0,0,"-",1],"user_hash":"cd6399291cae704620268538cbac9430"}</script>
+
+            <script src="http://static.zhihu.com/static/ver/be1f4e09e99650d8ff09ac81943bc61f.extern_src.min.js"></script>
+            <script src="http://static.zhihu.com/static/ver/60f6e687053394d0ec104e06d1c50d80.app_core.js"></script>
+            <script src="http://static.zhihu.com/static/ver/30bee34a30f42107cf3200aa0629c286.sign.js"></script>
+            <script src="http://static.zhihu.com/static/ver/928607f392b00d3feda9c7fb5ebc0f8b.app.js"></script>
+            <script src="http://static.zhihu.com/static/ver/46c6f900b1e2ffc13f9e966e40dba78d.rich_text_editor.js"></script>
+
+            <script type="text/zscript" znonce="4dce59898e8b4dabbe82f031961fdaec">
+ZH.entryP();
+            </script>
+
+            <input type="hidden" name="_xsrf" value="b9ee8e6f259247ffa03b934609a3771e" />
+</body>
+</html>

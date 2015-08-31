@@ -1,0 +1,382 @@
+﻿@model NOTKNOW.Controllers.ExploreModel
+@{
+    ViewBag.Title = "发现";    
+}
+
+<!DOCTYPE html>
+<html lang="zh-CN" dropEffect="none" class="no-js ">
+<head>
+<meta charset="utf-8" />
+
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="renderer" content="webkit" />
+
+<title>发现 - 你造嘛</title>
+
+<meta name="apple-itunes-app" content="app-id=432274380" />
+
+
+
+
+<meta http-equiv="mobile-agent" content="format=html5;url=http://www.zhihu.com/explore">
+<meta id="znonce" name="znonce" content="840c6911201d465883066415a848d443">
+
+
+
+
+<link rel="search" type="application/opensearchdescription+xml" href="http://static.zhihu.com/static/search.xml" title="你造嘛" />
+<link rel="stylesheet" href="~/content/CSS/people-index.css">
+    <link rel="stylesheet" href="~/content/CSS/topview.css">
+<!--[if lt IE 9]>
+<script src="http://static.zhihu.com/static/components/respond/dest/respond.min.js"></script>
+<link href="http://static.zhihu.com/static/components/respond/cross-domain/respond-proxy.html" id="respond-proxy" rel="respond-proxy" />
+<link href="/static/components/respond/cross-domain/respond.proxy.gif" id="respond-redirect" rel="respond-redirect" />
+<script src="/static/components/respond/cross-domain/respond.proxy.js"></script>
+<![endif]-->
+
+<script src="/Scripts/instant-min.js"></script>
+
+
+</head>
+
+<body class="zhi">
+@Html.Action("topView", "index");
+
+<div class="zu-global-notify" id="zh-global-message" style="display:none">
+<div class="zg-wrap">
+<div class="zu-global-nitify-inner">
+<a class="zu-global-notify-close" href="javascript:;" title="关闭" name="close">x</a>
+<span class="zu-global-notify-icon"></span>
+<span class="zu-global-notify-msg"></span>
+</div>
+</div>
+</div>
+
+<div class="zg-wrap zu-main page-explore">
+<div class="zu-main-content">
+<div class="zu-main-content-inner">
+
+<div id="zh-recommend">
+<div id="zh-recommend-title" class="page-title">
+<i class="zg-icon zg-icon-feedlist"></i>
+<span>编辑推荐</span>
+</div>
+<div id="zh-recommend-list">
+
+@{
+for (int i = 0; i < Model.recommendation.question.Count() && i < 5; i++)
+{
+<div class="recommend-feed feed-item">
+<span class="zg-right zg-gray-normal feed-meta">问答</span>
+<h2><a class="question_link" target="_blank" href="/question/show/@Model.recommendation.question[i].QID">@Model.recommendation.question[i].QContent</a></h2>
+</div>
+}
+}
+
+</div>
+</div>
+
+<div class="explore-tab" id="js-explore-tab">
+<a class="zg-anchor-hidden" name="daily-hot"></a>
+<a class="zg-anchor-hidden" name="monthly-hot"></a>
+<ul class="tab-navs clearfix" style="cursor: pointer;">
+<li class="tab-nav active"><a class="anchor">今日最热</a></li>
+<li class="tab-nav"><a class="anchor">本月最热</a></li>
+</ul>
+<div class="tab-panel">
+<div data-type="daily" id="daily">
+@{
+for (int i = 0; i < Model.dailyHot.question.Count() && i < 20; i++)
+{
+<div class="explore-feed feed-item" data-offset=1>
+<h2><a class="question_link" href="/question/show/@Model.dailyHot.question[i].QID">@Model.dailyHot.question[i].QContent</a></h2>
+<div tabindex="-1" class="zm-item-answer " data-aid="6779799" data-atoken="28494276" data-collapsed="0" data-created="1406542604" data-deleted="0" data-isowner="0" data-helpful="1">
+<a class="zg-anchor-hidden" name="answer-6779799"></a>
+
+
+@if (Model.dailyHot.answer[i].AUserID != 0)
+{
+<div class="zm-votebar">
+<button class="up" aria-pressed="false" title="赞同">
+<i class="icon vote-arrow"></i>
+<span class="label">赞同</span>
+<span class="count">@Model.dailyHot.answer[i].AUpvoteNum</span>
+</button>
+<button class="down" aria-pressed="false" title="反对，不会显示你的姓名">
+<i class="icon vote-arrow"></i>
+<span class="label">反对，不会显示你的姓名</span>
+</button>
+</div>
+
+<div class="zm-item-vote">
+<a name="expand" class="zm-item-vote-count" href="javascript:;" data-votecount="1307">@Model.dailyHot.answer[i].AUpvoteNum</a>
+</div>
+    
+<div class="answer-head">
+<div class="zm-item-answer-author-info">
+<h3 class="zm-item-answer-author-wrap">
+
+
+<a data-tip="p$t$miao-zhou-44" href="/people/_index?email=@Model.dailyHot.user[i].UEmail">@Model.dailyHot.user[i].UName</a>
+
+</h3>
+<a href="javascript:;" name="collapse" class="collapse meta-item zg-right"><i class="z-icon-fold"></i>收起</a>
+</div>
+
+<div class="zm-item-vote-info " data-votecount="1307">
+
+<span class="voters">
+<a data-tip="p$t$su-xiao-lan-38" href="http://www.zhihu.com/people/su-xiao-lan-38" class="zg-link" title="苏小懒">苏小懒</a>、<a data-tip="p$t$xiu-ze-yi" href="http://www.zhihu.com/people/xiu-ze-yi" class="zg-link" title="修泽铱">修泽铱</a>、<a data-tip="p$t$yun-sky" href="http://www.zhihu.com/people/yun-sky" class="zg-link" title="Yun Sky">Yun Sky</a>
+</span>
+
+
+<a href="javascript:;" class="more"> 等人赞同</a>
+
+
+</div>
+
+</div>
+
+<div class="zm-item-rich-text" data-resourceid="1904387" data-action="/answer/content">
+
+
+<div class="zh-summary summary clearfix" style="max-height: 200px; overflow: hidden; word-wrap: break-word;">
+
+@Html.Raw(Model.dailyHot.answer[i].AContent)
+<a href="/question/show/@Model.dailyHot.question[i].QID" class="toggle-expand">显示全部</a>
+
+</div>
+
+</div>
+
+<div class="zm-item-meta zm-item-comment-el answer-actions clearfix">
+<div class="zm-meta-panel">
+
+@if (Model.dailyHot.answer[i].ACommentNum != 0)
+{
+<a href="#" name="addcomment" class=" meta-item toggle-comment">
+<i class="z-icon-comment"></i>@Model.dailyHot.answer[i].ACommentNum 条评论</a>
+}
+else
+{
+<a href="/question/show/@Model.dailyHot.question[i].QID" name="addcomment" class=" meta-item toggle-comment">
+<i class="z-icon-comment"></i>添加评论</a>
+}
+
+<span class="copyright zu-autohide"></span>
+
+<a href="#" name="collapse" class="collapse meta-item zg-right"><i class="z-icon-fold"></i>收起</a>
+</div>
+
+</div>
+}  
+else
+{
+<div class="question-item-meta" style="margin-left: -50px;">
+<a class="zg-link-gray-normal meta-item" target="_blank" href="/question/show/@Model.dailyHot.question[i].QID">还没有回答</a>
+</div>
+}
+
+</div>
+</div>
+}
+}
+
+</div>
+<div data-type="monthly" id="monthly" style="display: none">
+@for (int i = 0; i < Model.monthlyHot.question.Count() && i < 20; i++)
+{
+<div class="explore-feed feed-item" data-offset=1>
+<h2><a class="question_link" href="/question/show/@Model.monthlyHot.question[i].QID">@Model.monthlyHot.question[i].QContent</a></h2>
+
+<div tabindex="-1" class="zm-item-answer " data-aid="6286143" data-atoken="27374252" data-collapsed="0" data-created="1404006458" data-deleted="0" data-isowner="0" data-helpful="1">
+<a class="zg-anchor-hidden" name="answer-6286143"></a>
+
+@if (Model.monthlyHot.answer[i].AUserID != 0)
+{
+<div class="zm-votebar">
+<button class="up" aria-pressed="false" title="赞同">
+<i class="icon vote-arrow"></i>
+<span class="label">赞同</span>
+<span class="count">@Model.monthlyHot.answer[i].AUpvoteNum</span>
+</button>
+<button class="down" aria-pressed="false" title="反对，不会显示你的姓名">
+<i class="icon vote-arrow"></i>
+<span class="label">反对，不会显示你的姓名</span>
+</button>
+</div>
+
+<div class="zm-item-vote">
+<a name="expand" class="zm-item-vote-count" href="javascript:;" data-votecount="1307">@Model.monthlyHot.answer[i].AUpvoteNum</a>
+</div>
+    
+<div class="answer-head">
+<div class="zm-item-answer-author-info">
+<h3 class="zm-item-answer-author-wrap">
+
+
+<a data-tip="p$t$miao-zhou-44" href="/people/_index?email=@Model.monthlyHot.user[i].UEmail">@Model.monthlyHot.user[i].UName</a>
+
+</h3>
+<a href="javascript:;" name="collapse" class="collapse meta-item zg-right"><i class="z-icon-fold"></i>收起</a>
+</div>
+
+<div class="zm-item-vote-info " data-votecount="1307">
+
+<span class="voters">
+<a data-tip="p$t$su-xiao-lan-38" href="http://www.zhihu.com/people/su-xiao-lan-38" class="zg-link" title="苏小懒">苏小懒</a>、<a data-tip="p$t$xiu-ze-yi" href="http://www.zhihu.com/people/xiu-ze-yi" class="zg-link" title="修泽铱">修泽铱</a>、<a data-tip="p$t$yun-sky" href="http://www.zhihu.com/people/yun-sky" class="zg-link" title="Yun Sky">Yun Sky</a>
+</span>
+
+
+<a href="javascript:;" class="more"> 等人赞同</a>
+
+
+</div>
+
+</div>
+
+<div class="zm-item-rich-text" data-resourceid="1904387" data-action="/answer/content">
+
+
+<div class="zh-summary summary clearfix">
+@Html.Raw(Model.monthlyHot.answer[i].AContent)
+<a href="/question/show/@Model.monthlyHot.question[i].QID" class="toggle-expand">显示全部</a>
+
+</div>
+
+</div>
+
+<div class="zm-item-meta zm-item-comment-el answer-actions clearfix">
+<div class="zm-meta-panel">
+@if (Model.monthlyHot.answer[i].ACommentNum != 0)
+{
+<a href="#" name="addcomment" class=" meta-item toggle-comment">
+<i class="z-icon-comment"></i>@Model.monthlyHot.answer[i].ACommentNum 条评论</a>
+}
+else
+{
+<a href="#" name="addcomment" class=" meta-item toggle-comment">
+<i class="z-icon-comment"></i>添加评论</a>
+}
+
+
+<span class="copyright zu-autohide"></span>
+
+<a href="#" name="collapse" class="collapse meta-item zg-right"><i class="z-icon-fold"></i>收起</a>
+</div>
+
+</div>
+}  
+else
+{
+<div class="question-item-meta" style="margin-left: -50px;">
+<a class="zg-link-gray-normal meta-item" target="_blank" href="/question/show/@Model.monthlyHot.question[i].QID">还没有回答</a>
+</div>
+}
+</div>
+</div>
+}
+
+</div>
+</div> 
+
+</div>
+</div>
+</div>
+<div class="zu-main-sidebar">
+
+<h2 class="side-title">编辑推荐</h2>
+<div class="pinned-topics js-pinned-topics">
+
+<div data-topicid="10" class="js-pin-item side-topic-item" style="visibility: visible;">
+<a class="pin-topic-avatar-link" href="/topic/questions/10">
+<img src="/content/res/topic/10.jpg" alt="电影" class="js-topic-avatar side-topic-avatar">
+</a>
+<div class="side-topic-content ellipsis">
+<a href="/topic/questions/10" title="电影" class="topic-link" data-token="19550429" data-topicid="68">娱乐</a>
+<div class="side-topic-meta">
+<span class="zg-gray">电影</span>
+<span class="bull">•</span>
+<span class="zg-gray">音乐</span>
+<span class="bull">•</span>
+<span class="zg-gray">生活之美</span>
+</div>
+</div>
+</div>
+<div data-topicid="10" class="js-pin-item side-topic-item" style="visibility: visible;">
+<a class="pin-topic-avatar-link" href="/topic/questions/9">
+<img src="/content/res/topic/9.jpg" alt="电影" class="js-topic-avatar side-topic-avatar">
+</a>
+<div class="side-topic-content ellipsis">
+<a href="/topic/questions/9" title="电影" class="topic-link" data-token="19550429" data-topicid="68">运动</a>
+<div class="side-topic-meta">
+<span class="zg-gray">生命在于运动</span>
+</div>
+</div>
+</div>
+<div data-topicid="10" class="js-pin-item side-topic-item" style="visibility: visible;">
+<a class="pin-topic-avatar-link" href="/topic/questions/31">
+<img src="/content/res/topic/31.jpg" alt="电影" class="js-topic-avatar side-topic-avatar">
+</a>
+<div class="side-topic-content ellipsis">
+<a href="/topic/questions/31" title="电影" class="topic-link" data-token="19550429" data-topicid="68">人生</a>
+<div class="side-topic-meta">
+<span class="zg-gray">人到底应该怎样活着？</span>
+</div>
+</div>
+</div>
+<div data-topicid="10" class="js-pin-item side-topic-item" style="visibility: visible;">
+<a class="pin-topic-avatar-link" href="/topic/questions/32">
+<img src="/content/res/topic/32.jpg" alt="电影" class="js-topic-avatar side-topic-avatar">
+</a>
+<div class="side-topic-content ellipsis">
+<a href="/topic/questions/32" title="电影" class="topic-link" data-token="19550429" data-topicid="68">创意</a>
+<div class="side-topic-meta">
+<span class="zg-gray">程序猿的世界怎能缺少创意！</span>
+</div>
+</div>
+</div>
+
+
+</div>
+
+</div>
+</div>
+
+
+<div class="zg-clear"></div>
+
+
+<script type="text/json" class="json-inline" data-name="current_user">["\u5c0f\u7b28\u86cb","xiao-ben-dan-11-72","http:\/\/pic3.zhimg.com\/295607bc5_s.jpg","3d1fff2b93afca8839b1a9424e52e509","\u592a\u7b28",1,1,1,"slf12thuss@163.com","http:\/\/mail.163.com",1,true,false]</script>
+<script type="text/json" class="json-inline" data-name="env">["zhihu.com","comet.zhihu.com",false,null]</script>
+<script type="text/json" class="json-inline" data-name="permissions">[]</script>
+
+<script type="text/json" class="json-inline" data-name="ga_vars">{"user_created":1405756277000,"now":1406217158000,"abtest_mask":"---------0--------------------","user_attr":[1,0,0,"-",1],"user_hash":"3d1fff2b93afca8839b1a9424e52e509"}</script>
+
+<script src="/Scripts/src-min.js"></script>
+<script src="/Scripts/app-core.js"></script>
+<script src="/Scripts/sign.js"></script>
+<script src="/Scripts/app.js"></script>
+<script src="/Scripts/text-editor.js"></script>
+<script src="/Scripts/topview.js"></script>
+<script type="text/zscript" znonce="840c6911201d465883066415a848d443">
+ZH.entryExplore();
+</script>
+<script>
+    $('.tab-nav').click(function () {
+        $('.tab-nav').removeClass('active');
+        $(this).addClass('active');
+        if (this.innerHTML == '<a class="anchor">今日最热</a>') {
+            $('#monthly').css('display', 'none');
+            $('#daily').css('display', 'block');
+        }
+        else {
+            $('#daily').css('display', 'none');
+            $('#monthly').css('display', 'block');
+        }
+    });
+</script>
+<input type="hidden" name="_xsrf" value="b9ee8e6f259247ffa03b934609a3771e"/>
+    <div style="left:200px;position:absolute;">@Html.Partial("footer")</div>
+</body>
+</html>

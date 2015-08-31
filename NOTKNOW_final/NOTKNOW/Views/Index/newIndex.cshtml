@@ -1,0 +1,604 @@
+﻿@model NOTKNOW.Controllers.IndexModel
+
+@section head{
+<meta charset="utf-8">
+
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="renderer" content="webkit">
+
+<title>首页 - 你造嘛</title>
+<link rel="stylesheet" href="~/content/CSS/topview.css">
+<meta name="apple-itunes-app" content="app-id=432274380">
+<meta http-equiv="mobile-agent" content="format=html5;url=http://www.zhihu.com/">
+<meta id="znonce" name="znonce" content="21706f51f90543b191aed2c09c14abd0">
+<link rel="apple-touch-icon-precomposed" href="http://static.zhihu.com/static/img/ios/zhihu(57px).png">
+<link rel="apple-touch-icon-precomposed" href="http://static.zhihu.com/static/img/ios/zhihu(72px).png" sizes="72x72">
+<link rel="apple-touch-icon-precomposed" href="http://static.zhihu.com/static/img/ios/zhihu(76px).png" sizes="76x76">
+<link rel="apple-touch-icon-precomposed" href="http://static.zhihu.com/static/img/ios/zhihu(114px).png" sizes="114x114">
+<link rel="apple-touch-icon-precomposed" href="http://static.zhihu.com/static/img/ios/zhihu(120px).png" sizes="120x120">
+<link rel="apple-touch-icon-precomposed" href="http://static.zhihu.com/static/img/ios/zhihu(152px).png" sizes="152x152">
+
+
+<link rel="shortcut icon" href="http://static.zhihu.com/static/favicon.ico" type="image/x-icon">
+
+<link rel="search" type="application/opensearchdescription+xml" href="http://static.zhihu.com/static/search.xml" title="知乎">
+<link rel="stylesheet" href="http://static.zhihu.com/static/ver/1a0898f7c45ce9f0fa253305fc3ec776.z.css">
+
+
+
+<!--[if lt IE 9]>
+<script src="http://static.zhihu.com/static/components/respond/dest/respond.min.js"></script>
+<link href="http://static.zhihu.com/static/components/respond/cross-domain/respond-proxy.html" id="respond-proxy" rel="respond-proxy" />
+<link href="/static/components/respond/cross-domain/respond.proxy.gif" id="respond-redirect" rel="respond-redirect" />
+<script src="/static/components/respond/cross-domain/respond.proxy.js"></script>
+<![endif]-->
+
+<script async="" src="//www.google-analytics.com/analytics.js"></script><script type="text/javascript" async="" src="http://www.google-analytics.com/ga.js"></script><script src="http://static.zhihu.com/static/ver/c18693016ee175f69ca64d8aac8f8d2b.instant.min.js"></script>
+
+<style>
+.zm-item-answer-author-info a.collapse{
+margin-top: 0;
+}
+</style>
+}
+<body class="zhi">
+@Html.Action("topView", "index");
+
+
+<div class="zu-global-notify" id="zh-global-message" style="display:none">
+<div class="zg-wrap">
+<div class="zu-global-nitify-inner">
+<a class="zu-global-notify-close" href="javascript:;" title="关闭" name="close">x</a>
+<span class="zu-global-notify-icon"></span>
+<span class="zu-global-notify-msg"></span>
+</div>
+</div>
+</div>
+
+
+<div class="zg-wrap zu-main" role="main" style="
+    margin-left: 200px;
+">
+<div class="zu-main-content">
+<div class="zu-main-content-inner">
+
+<div id="zu-welcome-once" class="zu-welcome-once zg-big-gray zg-clear" style="display:none;">
+<a href="javascript:;" data-tip="s$b$不再提示" class="x-m"></a>
+<h2>欢迎来到知乎！</h2>
+<p class="first-line">一个人大脑中从未分享过的疑惑、知识、经验、见解和判断力，总是另一群人非常想知道的东西。</p>
+</div>
+
+
+<div class="zg-section" id="zh-home-list-title">
+<i class="zg-icon zg-icon-feedlist"></i>
+最新动态 <input type="hidden" id="is-topstory2">
+<!--
+<span class="zg-right zm-noti-cleaner-setting" style="list-style:none"><a href="/settings/filter" class="zg-link-gray-normal"><i class="zg-icon zg-icon-settings"></i>设置</a></span>
+-->
+</div>
+<div class="zu-main-feed-con navigable" data-feedtype="topstory" id="zh-question-list" data-widget="navigable" data-navigable-options="{&quot;items&quot;:&quot;>.zh-general-list>.feed-item&quot;}">
+<a href="javascript:;" class="zu-main-feed-fresh-button" id="zh-main-feed-fresh-button" style="display:none"></a>
+<div id="js-home-feed-list" class="zh-general-list clearfix" data-init="{&quot;params&quot;: {}, &quot;nodename&quot;: &quot;TopStory2FeedList&quot;}">
+@for(int i = 0; i < Model.info.Count(); i++)
+{//用户关注话题下的热门回答
+<div class="feed-item folding feed-item-hook feed-item-7" feed-item-a="" data-type="a" id="feed-7" data-fid=":c">
+<meta itemprop="answer-id" content="2538709">
+<meta itemprop="answer-url-token" content="18469942">
+<div class="feed-item-inner">
+<div class="avatar">
+<a title="树二" data-tip="p$t$Tree2" class="zm-item-link-avatar" href="/topic/questions/@Model.info[i].topic.TID">
+    <img src="@Model.info[i].topic.TPhoto" class="zm-item-img-avatar">
+</a>
+</div>
+<div class="feed-main">
+<div class="source"> @Model.info[i].topic.TContent 下的热门回答
+<span class="time" data-timestamp="1406529000000">@Model.info[i].timeSpan</span>
+</div>
+<div class="content">
+<h2>
+    <a class="question_link" target="_blank" 
+        href="/question/show/@Model.info[i].question.QID">@Model.info[i].question.QContent</a></h2>
+<div class="feed-question-detail-item">
+
+<div class="question-description-plain zm-editable-content">
+
+</div>
+
+</div>
+<div class="entry-body " data-aid="2538709" data-atoken="18469942" 
+    data-collapsed="False" data-created="1377043606" data-deleted="0" 
+    data-isowner="0" data-helpful="1" data-score="0">
+
+<div class="zm-item-vote">
+<a name="expand" class="zm-item-vote-count" href="javascript:;" 
+    data-votecount="267">@Model.info[i].hotAnswer.AUpvoteNum</a>
+</div>
+<div class="zm-votebar">
+<button class="up" aria-pressed="false" title="赞同">
+<i class="icon vote-arrow"></i>
+<span class="label">赞同</span>
+<span class="count">@Model.info[i].hotAnswer.AUpvoteNum</span>
+</button>
+<button class="down" aria-pressed="false" title="反对，不会显示你的姓名">
+<i class="icon vote-arrow"></i>
+<span class="label">反对，不会显示你的姓名</span>
+</button>
+</div>
+
+<div class="zm-item-answer-detail">
+
+<div class="zm-item-answer-author-info">
+<h3 class="zm-item-answer-author-wrap">
+
+
+<a data-tip="p$t$Tree2" href="/people/_index?email=@Model.info[i].hotUser.UEmail">
+    @Model.info[i].hotUser.UName</a><br />
+    <strong title="影之神龛级别建筑师" class="zu-question-my-bio">@Model.info[i].hotUser.UIntroduction</strong>
+
+</h3>
+<a href="javascript:;" name="collapse" 
+    class="collapse meta-item zg-right"><i class="z-icon-fold"></i>收起</a>
+</div>
+
+<div class="zm-item-vote-info " data-votecount="267">
+
+<span class="voters">
+<a data-tip="p$t$gao-tian-yu-79" href="http://www.zhihu.com/people/gao-tian-yu-79" class="zg-link" title="高天予">高天予</a>、<a data-tip="p$t$nongchao" href="http://www.zhihu.com/people/nongchao" class="zg-link" title="覺淺">覺淺</a>、<a data-tip="p$t$yi-yan-tong-84" href="http://www.zhihu.com/people/yi-yan-tong-84" class="zg-link" title="易言童">易言童</a>
+</span>
+
+
+<a href="javascript:;" class="more"> 等人赞同</a>
+
+
+</div>
+<div class="zm-item-rich-text"  style="
+    max-height: 200px;
+    word-wrap: break-word;overflow:hidden;" data-resourceid="784316" data-action="/answer/content">
+
+     @Html.Raw(Model.info[i].hotAnswer.AContent)
+
+</div>
+</div>
+</div>
+<div class="feed-meta">
+<div class="zm-item-meta zm-item-comment-el answer-actions clearfix">
+<div class="zm-meta-panel">
+
+
+@if (Model.info[i].hotAnswer.ACommentNum != 0)
+{
+<a href="/question/show/@Model.info[i].hotAnswer.AQuestionID" name="addcomment" class=" meta-item toggle-comment">
+<i class="z-icon-comment"></i>@Model.info[i].hotAnswer.ACommentNum 条评论</a>
+}
+else
+{
+<a href="/question/show/@Model.info[i].hotAnswer.AQuestionID" name="addcomment" class=" meta-item toggle-comment">
+<i class="z-icon-comment"></i>添加评论</a>
+}
+
+<span class="copyright zu-autohide"></span>
+
+<a href="#" name="collapse" class="collapse meta-item zg-right"><i class="z-icon-fold"></i>收起</a>
+</div>
+
+</div>
+<a href="#" class="ignore zu-autohide" name="dislike" data-tip="s$b$不感兴趣"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="dislike-wrap" data-item_id="6" data-item_type="0" data-score="107.26092">
+此内容将不会在动态中再次显示 <span class="zg-bull">•</span> <a href="#" class="meta-item revert">撤销</a>
+<a href="#" class="ignore zu-autohide close"></a>
+</div>
+</div>
+}
+
+@for(var i = 0; i < Model.ua.Count(); i++)
+{
+    if (Model.ua[i].flag == 'a')//---回答---
+    {
+        <div class="feed-item folding feed-item-hook feed-item-5" feed-item-a="" data-type="a" id="feed-5" data-fid=":c">
+<meta itemprop="answer-id" content="6603643">
+<meta itemprop="answer-url-token" content="28063082">
+<div class="feed-item-inner">
+<div class="avatar">
+<a data-tip="p$b$lao-li-60" class="zm-item-link-avatar" href="/people/lao-li-60" data-original_title="老李">
+<img src="@Model.ua[i].keyUser.UPhoto" class="zm-item-img-avatar">
+</a>
+</div>
+<div class="feed-main">
+<div class="source">
+@Model.ua[i].keyUser.UName 回答了问题
+<span class="time" data-timestamp="1406543400000">@Model.ua[i]._time</span>
+</div>
+<div class="content">
+<h2><a class="question_link" target="_blank" 
+    href="/question/24502955#answer-6603643"> @Model.ua[i].question.QContent</a></h2>
+<div class="feed-question-detail-item">
+
+<a href="#" name="expandQuestionDetail" 
+    class="toggle-expand btn-toggle-question-detail ellipsis">
+    新闻链接：新奔驰C级长轴距版接受预定 预...&nbsp;&nbsp;<span>显示问题详情</span></a>
+<div class="question-description zm-editable-content">
+新闻链接：<a href="http://auto.sina.com.cn/news/2014-07-15/18121309312.shtml" class=" wrap external" target="_blank" rel="nofollow">新奔驰C级长轴距版接受预定 预售37万起<i class="icon-external"></i></a><br>相比C级长轴距版的竞争对手 BMW 3系长轴距版（AT 版起步售价 35.88万）、Audi A4L（AT 版起步售价29.1万）的售价，定价是否过高？<br><br>以上起步售价来自各品牌官网。
+</div>
+
+</div>
+<div class="entry-body " data-aid="6603643" data-atoken="28063082" data-collapsed="False" data-created="1405581620" data-deleted="0" data-isowner="0" data-helpful="1" data-score="0">
+
+<div class="zm-item-vote">
+<a name="expand" class="zm-item-vote-count" href="javascript:;" data-votecount="26">26</a>
+</div>
+<div class="zm-votebar">
+<button class="up" aria-pressed="false" title="赞同">
+<i class="icon vote-arrow"></i>
+<span class="label">赞同</span>
+<span class="count">26</span>
+</button>
+<button class="down" aria-pressed="false" title="反对，不会显示你的姓名">
+<i class="icon vote-arrow"></i>
+<span class="label">反对，不会显示你的姓名</span>
+</button>
+</div>
+
+<div class="zm-item-answer-detail">
+
+<div class="zm-item-answer-author-info">
+<h3 class="zm-item-answer-author-wrap">
+
+
+<a data-tip="p$b$lao-li-60" href="/people/_index?email=@Model.ua[i].keyUser.UEmail">
+    @Model.ua[i].keyUser.UName</a>
+    <strong title="帝都人在魔都" class="zu-question-my-bio">@Model.ua[i].keyUser.UIntroduction</strong>
+
+</h3>
+<a href="javascript:;" name="collapse" 
+    class="collapse meta-item zg-right"><i class="z-icon-fold"></i>收起</a>
+</div>
+
+
+<div class="zm-item-rich-text" 
+    style="max-height: 200px;word-wrap: break-word;overflow:hidden;" 
+    data-resourceid="1983192" data-action="/answer/content">
+
+<div class="zh-summary summary clearfix" style="max-height: 200px; overflow: hidden; word-wrap: break-word;">
+    @Html.Raw(Model.ua[i].answer.AContent);
+
+</div>
+
+</div>
+</div>
+</div>
+<div class="feed-meta">
+<div class="zm-item-meta zm-item-comment-el answer-actions clearfix">
+<div class="zm-meta-panel">
+@if (@Model.ua[i].answer.ACommentNum != 0)
+{
+<a href="/question/show/@Model.ua[i].answer.AQuestionID" name="addcomment" class=" meta-item toggle-comment">
+<i class="z-icon-comment"></i> @Model.ua[i].answer.ACommentNum 条评论</a>
+}
+else
+{
+<a href="/question/show/@Model.ua[i].answer.AQuestionID" name="addcomment" class=" meta-item toggle-comment">
+<i class="z-icon-comment"></i> 添加评论</a>
+}
+
+
+
+
+
+<span class="copyright zu-autohide"></span>
+
+<a href="#" name="collapse" class="collapse meta-item zg-right"><i class="z-icon-fold"></i>收起</a>
+</div>
+
+</div>
+<a href="#" class="ignore zu-autohide" name="dislike" data-tip="s$b$不感兴趣"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="dislike-wrap" data-item_id="4" data-item_type="0" data-score="107.38884">
+此内容将不会在动态中再次显示 <span class="zg-bull">•</span> <a href="#" class="meta-item revert">撤销</a>
+<a href="#" class="ignore zu-autohide close"></a>
+</div>
+</div>
+    }
+    else if (Model.ua[i].flag == 'p')//---提问---
+    {
+        <div class="feed-item folding feed-item-hook feed-item-138" feed-item-q="" data-type="q" id="feed-138" data-fid=":cw">
+<meta itemprop="question-id" content="2012046">
+<meta itemprop="question-url-token" content="24574864">
+<div class="feed-item-inner">
+<div class="avatar">
+<a title="徐子茹" data-tip="p$t$xu-zi-ru-60" class="zm-item-link-avatar" 
+    href="/people/_index?email=@Model.ua[i].keyUser.UEmail">
+<img src="@Model.ua[i].keyUser.UPhoto" class="zm-item-img-avatar">
+</a>
+</div>
+<div class="feed-main">
+<div class="source">
+<a data-tip="p$t$xu-zi-ru-60" href="/people/_index?email=@Model.ua[i].keyUser.UEmail" 
+    target="_blank" class="zg-link" title="徐子茹">@Model.ua[i].keyUser.UName</a> 提出了问题
+<span class="time" data-timestamp="1406015671000">@Model.ua[i]._time</span>
+</div>
+<div class="content">
+<h2><a class="question_link" target="_blank" href="/question/show/@Model.ua[i].question.QID">
+    @Model.ua[i].question.QContent</a></h2>
+
+
+<div class="feed-meta">
+<div class="zm-item-meta meta clearfix">
+<div class="zm-meta-panel">
+<a href="#" name="toggle-comment" class="meta-item toggle-comment">
+<i class="z-icon-comment"></i>添加评论</a>
+<a href="/question/show/@Model.ua[i].question.QID" class="meta-item" target="_blank">@Model.ua[i].question.QAnswerNum 个回答</a>
+<a href="javascript:;" name="collapse" class="meta-item collapse"><i class="z-icon-fold"></i>收起</a>
+</div>
+
+</div>
+<a href="#" class="ignore zu-autohide" name="dislike" data-tip="s$b$不感兴趣"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="dislike-wrap" data-item_id="137" data-item_type="0" data-score="102.560576449">
+此内容将不会在动态中再次显示 <span class="zg-bull">•</span> <a href="#" class="meta-item revert">撤销</a>
+<a href="#" class="ignore zu-autohide close"></a>
+</div>
+</div>
+    }
+    else if (Model.ua[i].flag == 'q')//--关注问题--
+    {
+        <div class="feed-item folding feed-item-hook feed-item-86" feed-item-q="" data-type="q" id="feed-86" data-fid=":6v">
+<meta itemprop="question-id" content="2009504">
+<meta itemprop="question-url-token" content="24568580">
+<div class="feed-item-inner">
+<div class="avatar">
+<a title="陈章鱼" data-tip="p$t$ChenZhangyu" class="zm-item-link-avatar" 
+    href="/people/_index?email=@Model.ua[i].keyUser.UEmail">
+<img src="@Model.ua[i].keyUser.UPhoto" class="zm-item-img-avatar">
+</a>
+</div>
+<div class="feed-main">
+<div class="source">
+<a data-tip="p$t$ChenZhangyu" 
+    href="/people/_index?email=@Model.ua[i].keyUser.UEmail" 
+    target="_blank" class="zg-link" title="陈章鱼">@Model.ua[i].keyUser.UName</a> 关注了问题
+<span class="time" data-timestamp="1406165859000">@Model.ua[i]._time</span>
+</div>
+<div class="content">
+<h2><a class="question_link" target="_blank" href="/question/show/@Model.ua[i].question.QID">
+    @Model.ua[i].question.QContent</a></h2>
+
+
+<div class="feed-meta">
+<div class="zm-item-meta meta clearfix">
+<div class="zm-meta-panel">
+<a href="/question/show/@Model.ua[i].question.QID" class="meta-item" target="_blank">@Model.ua[i].question.QAnswerNum 个回答</a>
+<a href="javascript:;" name="collapse" class="meta-item collapse"><i class="z-icon-fold"></i>收起</a>
+</div>
+
+</div>
+<a href="#" class="ignore zu-autohide" name="dislike" data-tip="s$b$不感兴趣"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="dislike-wrap" data-item_id="85" data-item_type="0" data-score="103.680592897">
+此内容将不会在动态中再次显示 <span class="zg-bull">•</span> <a href="#" class="meta-item revert">撤销</a>
+<a href="#" class="ignore zu-autohide close"></a>
+</div>
+</div>
+    }
+    else if (Model.ua[i].flag == 't')//--关注话题--
+    {
+        
+ <div class="feed-item folding feed-item-hook feed-item-154" feed-item-a="" data-type="a" id="feed-154" data-fid=":et">
+<meta itemprop="answer-id" content="220">
+<meta itemprop="answer-url-token" content="12202566">
+<div class="feed-item-inner">
+<div class="avatar">
+<a title="赵阿萌" data-tip="p$t$amonjok" class="zm-item-link-avatar" 
+    href="/people/_index?email=@Model.ua[i].keyUser.UEmail">
+<img src="@Model.ua[i].keyUser.UPhoto" class="zm-item-img-avatar">
+</a>
+</div>
+<div class="feed-main">
+<div class="source">
+@Model.ua[i].keyUser.UName 关注了话题 
+    <a href="/topic/questions/@Model.ua[i].topic.TID" title="心理学" class="topic-link"> 
+        @Model.ua[i].topic.TContent</a>
+<span class="time" data-timestamp="1405927800000">@Model.ua[i]._time</span>
+</div>
+<div class="content">
+<div class="zm-profile-section-item zm-item clearfix" id="act-377936398">
+
+</div>
+
+
+</div>
+</div>
+</div>
+<div class="dislike-wrap" data-item_id="153" data-item_type="0" data-score="101.98422">
+此内容将不会在动态中再次显示 <span class="zg-bull">•</span> <a href="#" class="meta-item revert">撤销</a>
+<a href="#" class="ignore zu-autohide close"></a>
+</div>
+</div>
+    }
+}   
+
+ 
+
+</div>
+<a href="javascript:;" id="zh-load-more" data-method="next" class="zg-btn-white zg-r3px zu-button-more" style="display: none">更多</a>
+</div>
+</div>
+</div>
+<div class="zu-main-sidebar">
+
+<style type="text/css">
+.zh-shameimaru-7d45878bc {
+    display: block;
+    margin-bottom: 20px;
+    position: relative;
+}
+.zh-shameimaru-7d45878bc .shameimaru-link {
+    display: block;
+    background: url("http://p1.zhimg.com/d9/33/d933be46f7a3b57237b7fbf1b187f7f5.png") no-repeat;
+    width: 270px;
+    height: 190px;
+}
+.zh-shameimaru-7d45878bc .shameimaru-close {
+    display: none;
+    height: 16px;
+    width: 16px;
+    background-position: -146px -202px;
+    position: absolute;
+    right: 3px;
+    top: 3px;
+    text-indent: -9999px;
+    opacity: .3;
+}
+.zh-shameimaru-7d45878bc .shameimaru-close:hover {
+    opacity: .6;
+}
+.zh-shameimaru-7d45878bc:hover .shameimaru-close {
+    display: block;
+}
+
+</style>
+<div class="zm-side-section" style="margin-top: 30px">
+<div class="zm-side-section-inner">
+<div class="zm-side-nav-group">
+<ul class="zm-side-nav" id="zg-sidebar-nav">
+<li class="zm-side-nav-li">
+<a class="zm-side-nav-link" href="/people/_ask?email=@Model.myUser.UEmail">
+<i class="zg-icon zg-icon-sidenav-draft"></i>
+我的提问  
+</a>
+</li>
+<li class="zm-side-nav-li">
+<a class="zm-side-nav-link" href="/people/_answer?email=@Model.myUser.UEmail">
+<i class="zg-icon zg-icon-sidenav-fav"></i>
+我的回答
+</a>
+</li>
+</ul>
+</div>
+<div class="zm-side-nav-group">
+<ul class="zm-side-nav">
+<li class="zm-side-nav-li">
+<a class="zm-side-nav-link" href="/topic/topics">
+<i class="zg-icon zg-icon-sidenav-plaza"></i>
+话题广场
+</a>
+</li>
+<li class="zm-side-nav-li">
+<a class="zm-side-nav-link" href="people/focusTopic?email=@Model.myUser.UEmail">
+<i class="zg-icon zg-icon-sidenav-follow"></i>
+我关注的话题
+</a>
+</li>
+<li class="zm-side-nav-li">
+<a class="zm-side-nav-link" href="/topic">
+<i class="zg-icon zg-icon-sidenav-all"></i>
+我关注的话题动态
+</a>
+</li>
+</ul>
+</div>
+
+</div>
+</div>
+
+
+
+
+
+
+
+
+<style type="text/css">
+.zh-shameimaru-624d12bf0 {
+    display: block;
+    margin-bottom: 20px;
+    position: relative;
+}
+.zh-shameimaru-624d12bf0 .shameimaru-link {
+    display: block;
+    background: url("http://p3.zhimg.com/67/cb/67cb10bac3a99321dfa06fd6ba7b56aa.png") no-repeat;
+    width: 270px;
+    height: 150px;
+}
+.zh-shameimaru-624d12bf0 .shameimaru-close {
+    display: none;
+    height: 16px;
+    width: 16px;
+    background-position: -146px -202px;
+    position: absolute;
+    right: 3px;
+    top: 3px;
+    text-indent: -9999px;
+    opacity: .3;
+}
+.zh-shameimaru-624d12bf0 .shameimaru-close:hover {
+    opacity: .6;
+}
+.zh-shameimaru-624d12bf0:hover .shameimaru-close {
+    display: block;
+}
+</style>
+<div class="zg-clear"></div>
+</div>
+<div class="zg-clear"></div>
+</div>
+<!--
+<div id="zh-footer" class="zh-footer">
+<div class="zg-wrap clearfix">
+<ul>
+
+<li><a href="/question/19581624" target="_blank">知乎指南</a></li>
+<li><a href="javascript:;" id="js-feedback-button">建议反馈</a></li>
+
+<li><a href="/app" target="_blank">移动应用</a></li>
+<li><a href="/read">知乎阅读</a></li>
+<li><a href="/jobs">加入知乎</a></li>
+<li><a href="/terms" target="_blank">知乎协议</a></li>
+</ul>
+<span class="copy">© 2014 知乎</span>
+</div>
+</div>
+-->
+<script type="text/json" class="json-inline" data-name="current_user">["\u7d2b\u8272\u98ce\u94c3","zi-se-feng-ling-67","http:\/\/pic2.zhimg.com\/5b8d23fd4_s.jpg","cadc3455fd59b14a2ce395cea6dcada0","",0,0,1,"wytthuss@126.com","http:\/\/www.126.com",1,false,false]</script>
+<script type="text/json" class="json-inline" data-name="env">["zhihu.com","comet.zhihu.com",false,null]</script>
+<script type="text/json" class="json-inline" data-name="permissions">[]</script>
+
+
+<script type="text/json" class="json-inline" data-name="ga_vars">{"user_created":1377582484000,"now":1406530838000,"abtest_mask":"---------1--------------------","user_attr":[1,0,0,"-","-"],"user_hash":"cadc3455fd59b14a2ce395cea6dcada0"}</script>
+
+
+<script src="http://static.zhihu.com/static/ver/be1f4e09e99650d8ff09ac81943bc61f.extern_src.min.js"></script>
+<script src="http://static.zhihu.com/static/ver/0697483e2ab1a23857dd2b0197e41827.app_core.js"></script>
+<script src="http://static.zhihu.com/static/ver/f9e164926a90bbc3e832c7bef28fe05d.sign.js"></script>
+<script src="http://static.zhihu.com/static/ver/2bc515676ae90064a8f05acf3167b130.app.js"></script>
+<script src="http://static.zhihu.com/static/ver/286bd6f805a8fe20da98e7c2e09276f3.rich_text_editor.js"></script>
+<script src="~/Scripts/topview.js"></script>
+<script type="text/zscript" znonce="21706f51f90543b191aed2c09c14abd0">
+ZH.entryHome();
+</script>
+
+<input type="hidden" name="_xsrf" value="7135e63f9d554fcf84bb443449d79c07">
+
+<div class="zh-backtotop" style="display:none"><a data-action="backtotop" data-tip="s$r$回到顶部" href="javascript:;" class="btn-backtotop btn-action"><div class="arrow"></div><div class="stick"></div></a></div><div id="zh-tooltip" class="tooltip bottom" style="visibility: hidden; left: 1105px; top: 90px; display: none;"><div class="tooltip-arrow"></div><div class="tooltip-inner">不再显示</div></div><div id="zh-global-spinner" style="display: none;">加载中…</div>
+
+
+
+    <script src="/Scripts/jquery-1.7.1.js"></script>
+
+    
+
+<div style="left:200px;position:absolute;">@Html.Partial("footer")</div>
+</body>
+</html>

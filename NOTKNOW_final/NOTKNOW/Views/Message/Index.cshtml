@@ -1,0 +1,295 @@
+﻿@model NOTKNOW.Controllers.MessageModel
+@{
+    ViewBag.Title = "私信-你造嘛";
+}
+
+
+@section head{
+    <head>
+
+        <meta charset="utf-8" />
+
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+        <meta name="renderer" content="webkit" />
+
+        <title>私信 - 你造嘛</title>
+
+        <meta name="apple-itunes-app" content="app-id=432274380" />
+
+
+
+
+        <meta http-equiv="mobile-agent" content="format=html5;url=http://www.zhihu.com/inbox">
+        <meta id="znonce" name="znonce" content="ccf763ee1567403181910a0cfe04e73a">
+        <link rel="apple-touch-icon-precomposed" href="http://static.zhihu.com/static/img/ios/zhihu(57px).png" />
+        <link rel="apple-touch-icon-precomposed" href="http://static.zhihu.com/static/img/ios/zhihu(72px).png" sizes="72x72" />
+        <link rel="apple-touch-icon-precomposed" href="http://static.zhihu.com/static/img/ios/zhihu(76px).png" sizes="76x76" />
+        <link rel="apple-touch-icon-precomposed" href="http://static.zhihu.com/static/img/ios/zhihu(114px).png" sizes="114x114" />
+        <link rel="apple-touch-icon-precomposed" href="http://static.zhihu.com/static/img/ios/zhihu(120px).png" sizes="120x120" />
+        <link rel="apple-touch-icon-precomposed" href="http://static.zhihu.com/static/img/ios/zhihu(152px).png" sizes="152x152" />
+        <link rel="stylesheet" href="~/content/CSS/topview.css">
+
+        <link rel="shortcut icon" href="http://static.zhihu.com/static/favicon.ico" type="image/x-icon">
+
+        <link rel="search" type="application/opensearchdescription+xml" href="http://static.zhihu.com/static/search.xml" title="知乎" />
+        <link rel="stylesheet" href="http://static.zhihu.com/static/ver/1a0898f7c45ce9f0fa253305fc3ec776.z.css">
+
+
+
+        <!--[if lt IE 9]>
+<script src="http://static.zhihu.com/static/components/respond/dest/respond.min.js"></script>
+<link href="http://static.zhihu.com/static/components/respond/cross-domain/respond-proxy.html" id="respond-proxy" rel="respond-proxy" />
+<link href="/static/components/respond/cross-domain/respond.proxy.gif" id="respond-redirect" rel="respond-redirect" />
+<script src="/static/components/respond/cross-domain/respond.proxy.js"></script>
+<![endif]-->
+
+        <script src="http://static.zhihu.com/static/ver/c18693016ee175f69ca64d8aac8f8d2b.instant.min.js"></script>
+        @Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/bundles/jqueryval")
+    </head>
+}
+
+<body class="zhi">
+    @Html.Action("topView", "index");
+
+    <div class="zu-global-notify" id="zh-global-message" style="display: none">
+        <div class="zg-wrap">
+            <div class="zu-global-nitify-inner">
+                <a class="zu-global-notify-close" href="javascript:;" title="关闭" name="close">x</a>
+                <span class="zu-global-notify-icon"></span>
+                <span class="zu-global-notify-msg"></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="zg-wrap zu-main" style="
+    margin-left: 200px;
+    width: 1010px;
+">
+        <div class="zu-main-content">
+            <div class="zu-main-content-inner" id="zh-pm-page-wrap">
+                <div class="zg-section">
+                    <button class="zg-btn-justify zg-btn-blue zg-right" id="zh-create-pm" style="margin-top: -4px;">写私信</button>
+                    <h2>我的私信</h2>
+                </div>
+
+                <div id="zh-pm-item-wrap">
+
+                    @foreach (var x in Model.packs.AsEnumerable())
+                    {
+
+                        <div class="zm-pm-item" data-token="9808544800" data-member="9991924700" 
+    data-name="@x.friend.UName" data-type="common" data-report-token="9808544800">
+                            <a class="zm-item-link-avatar50" href="/people/_index?email=@x.friend.UEmail">
+                                <img class="zm-item-img-avatar50" src="@x.friend.UPhoto" />
+                            </a>
+                            @for (var i = 0; i < x.messages.Count() && i < 1; i++)
+                            {
+
+                                if (x.messages[i].MFrom == x.friend.UID)
+                                {
+                                <div class="zm-pm-item-main">
+                                    <a href="/people/_index?email=@x.friend.UEmail" id="pmto-9991924700" 
+                data-tip="p$b$xu-zi-ru-60" class="pm-touser">@x.friend.UName</a>: @x.messages[i].MContent
+                                </div>     
+                                }
+                                else
+                                {
+                                <div class="zm-pm-item-main">
+                                    我发送给
+            <a href="/people/_index?email=@x.friend.UEmail" id="pmto-9991924700"
+            data-tip="p$b$xu-zi-ru-60" class="pm-touser">@x.friend.UName</a>: @x.messages[i].MContent
+
+                                </div>}
+                                <div class="zg-gray zu-pm-item-meta">
+                                    <span class="zg-gray zg-left">@x.messages[i].MTime  </span>
+                                    <a class="zg-link-litblue" href="/message/inbox/@x.friend.UID">共 @x.messages.Count() 条对话</a>
+                                    <span class="zg-bull">|</span>
+                                    <a class="@x.friend.UID zg-link-litblue" href="javascript:;" name="reply">回复</a>
+                                    <span class="zg-bull">|</span>
+                                    <a class="@x.friend.UID zg-link-litbluee" href="javascript:;" name="delete">删除</a>
+                                </div>
+                            }
+
+                        </div>
+                        <div class="modal-dialog-bg @x.friend.UID" style="display:none; opacity: 0.5; width: 1349px; height: 599px;"></div>
+                        <form method="post" action="/message/send/@x.friend.UID">
+                            <div class="modal-dialog @x.friend.UID" tabindex="0" role="dialog" aria-labelledby=":5" 
+    style="display:none;left: 250px; top: 140px;">
+                                <div class="modal-dialog-title modal-dialog-title-draggable" id=":5">
+                                    <span class="modal-dialog-title-text">发送私信</span>
+                                    <span class="modal-dialog-title-close @x.friend.UID"></span>
+                                </div>
+                                <div class="modal-dialog-content">
+                                    <div class="zm-pm-wrap">
+                                        <dl class="zm-form-table zm-form-table-medium">
+                                            <dt class="zm-form-table-head zm-form-table-head-align-middle">
+                                                <label class="zg-medium-gray">发给：</label></dt>
+                                            <dd class="zm-form-table-field">
+                                                <div class="zm-pm-selector-wrap">
+                                                    <div class="zg-user-name" style="padding: 4px 0px 0px;">@x.friend.UName</div>
+                                                </div>
+                                            </dd>
+                                            <dt class="zm-form-table-head zm-form-table-head-align-middle">
+                                                <label class="zg-medium-gray">内容：</label></dt>
+                                            <dd class="zm-form-table-field zm-form-table-field-last">
+                                                <div class="zg-editor-simple-wrap zg-form-text-input">
+                                                    <textarea name="content" class="zg-editor-input zu-seamless-input-origin-element" style="font-weight: normal; white-space: pre; height: 66px; min-height: 66px;"></textarea>
+                                                </div>
+                                            </dd>
+                                        </dl>
+                                        <div class="zh-pm-warnmsg" style="display: none; text-align: right; color: #C3412F;"></div>
+                                        <div class="zm-command zg-clear">
+                                            <div class="zm-item-meta zg-left" style="margin: 0 0 0 57px;"><span class="zg-text-counter" style="display: none">还可以输入 500 字</span><span class="additional-info"></span></div>
+                                            <a name="cancel" href="javascript:;" class="zm-command-cancel @x.friend.UID">取消</a>
+                                            <input class="zg-btn-blue zg-r3px" type="submit" value="发送" id="submit" name="submit">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-dialog-buttons" style="display: none;"></div>
+                            </div>
+                        </form>
+                        <div class="modal-dialogg with-button @x.friend.UID" tabindex="0" role="dialog" 
+    aria-labelledby=":6" style="background-color: white;
+z-index: 100;display: none; left: 280px; top: 158px;position: absolute;width: 400px;border: 1px solid #888;  box-shadow: 0 0 80px 0 rgba(0,0,0,.4);border-radius: 10px;font-size: 14px;">
+                            <div class="modal-dialog-title modal-dialog-title-draggable" id=":6">
+                                <span class="modal-dialog-title-text">删除私信会话</span>
+                                <span class="modal-dialog-title-closee @x.friend.UID"></span>
+                            </div>
+                            <div class="modal-dialog-content">你确定要删除与 @x.friend.UName 的所有会话吗？</div>
+                            <div class="modal-dialog-buttons">
+                                <button name="cancel" class="zg-link-btn zm-command-cancell @x.friend.UID">取消</button>
+                                <a href="/message/deleteAll/@x.friend.UID" name="yes" class="zg-btn-blue">确认</a>
+                            </div>
+                        </div>  
+                        <!--点删除 显示框 -->
+                        <script>
+                            $(".zg-link-litbluee.@x.friend.UID").click(function () {
+                                $(".with-button.modal-dialogg.@x.friend.UID").css("display", "block");
+    })</script>
+                        <!--点叉叉 关闭框 -->
+                        <script>   $(".modal-dialog-title-closee.@x.friend.UID").click(function () {
+       $(".modal-dialogg.@x.friend.UID").css("display", "none");
+   })
+                        </script>    
+                        <!--点取消 关闭框 -->    
+                        <script>
+                            $(".zm-command-cancell.@x.friend.UID").click(function () {
+                                $(".modal-dialogg.@x.friend.UID").css("display", "none");
+    })
+                        </script>      
+                        <!--点回复 显示框 -->    
+                        <script>
+                            $(".zg-link-litblue.@x.friend.UID").click(function () {
+                                $(".modal-dialog-bg.@x.friend.UID").css("display", "block");
+        $(".modal-dialog.@x.friend.UID").css("display", "block");
+    })</script>
+                        <!--点关闭 显示框 -->      
+                        <script>   $(".modal-dialog-title-close.@x.friend.UID").click(function () {
+       $(".modal-dialog-bg.@x.friend.UID").css("display", "none");
+       $(".modal-dialog.@x.friend.UID").css("display", "none");
+   })
+                        </script> 
+                        <!--点取消 关闭框 -->    
+                        <script>
+                            $(".zm-command-cancel.@x.friend.UID").click(function () {
+                                $(".modal-dialog-bg.@x.friend.UID").css("display", "none");
+        $(".modal-dialog.@x.friend.UID").css("display", "none");
+    })
+                        </script>     
+                    }
+                </div>
+                <a style="display: none" class="zg-btn-white zg-r3px zu-button-more" id="zh-load-more" href="javascript:;">更多</a>
+            </div>
+        </div>
+
+        <div class="zg-clear"></div>
+    </div>
+
+
+
+    <script type="text/json" class="json-inline" data-name="current_user">["\u7d2b\u8272\u98ce\u94c3","zi-se-feng-ling-67","http:\/\/pic2.zhimg.com\/5b8d23fd4_s.jpg","cadc3455fd59b14a2ce395cea6dcada0","",0,0,1,"wytthuss@126.com","http:\/\/www.126.com",1,false,false]</script>
+    <script type="text/json" class="json-inline" data-name="env">["zhihu.com","comet.zhihu.com",false,null]</script>
+    <script type="text/json" class="json-inline" data-name="permissions">[]</script>
+
+
+    <script type="text/json" class="json-inline" data-name="ga_vars">{"user_created":1377582484000,"now":1406442747000,"abtest_mask":"---------1--------------------","user_attr":[1,0,0,"-","-"],"user_hash":"cadc3455fd59b14a2ce395cea6dcada0"}</script>
+    <link href="../Scripts/jquery-autocomplete-new/jquery.autocomplete.css" rel="stylesheet" type="text/css" />
+    <script src="../Scripts/jquery-1.5.1.min.js" type="text/javascript"></script>
+    <script src="../Scripts/jquery-autocomplete-new/jquery.autocomplete.js" type="text/javascript"></script>
+    <script src="http://static.zhihu.com/static/ver/be1f4e09e99650d8ff09ac81943bc61f.extern_src.min.js"></script>
+    <script src="http://static.zhihu.com/static/ver/abc90430f2eaf87fb941edd09df86e2c.app_core.js"></script>
+    <script src="http://static.zhihu.com/static/ver/9e57a5bc686d70b5f1de0617cbb54ff5.sign.js"></script>
+    <script src="http://static.zhihu.com/static/ver/44bd17bf129100404fe226a0122369c8.app.js"></script>
+    <script src="http://static.zhihu.com/static/ver/ef88d2644193c89d50e427800da83f13.rich_text_editor.js"></script>
+    <script src="/Scripts/topview.js"></script>
+    <script type="text/zscript" znonce="ccf763ee1567403181910a0cfe04e73a">
+ZH.entryPM();
+    </script>
+
+    <input type="hidden" name="_xsrf" value="7135e63f9d554fcf84bb443449d79c07" />
+
+    <div class="modal-dialog-bg" style="display: none; opacity: 0.5; width: 1349px; height: 599px;"></div>
+  
+    <form method="post" action="/message/sendto">
+        <div class="modal-dialog 0" tabindex="0" role="dialog"
+            aria-labelledby=":5" style="left: 463.5px; top: 36.5px; display: none">
+            <div class="modal-dialog-title modal-dialog-title-draggable" id=":5">
+                <span class="modal-dialog-title-text">发送私信</span>
+                <span class="modal-dialog-title-close"></span>
+            </div>
+            <div class="modal-dialog-content">
+                <div class="zm-pm-wrap">
+                    <dl class="zm-form-table zm-form-table-medium">
+                        <dt class="zm-form-table-head zm-form-table-head-align-middle">
+                            <label class="zg-medium-gray">发给：</label>
+
+                        </dt>
+                        <dd class="zm-form-table-field">
+                            <div class="zm-pm-selector-wrap">
+                                <div class="zg-user-name" style="display: none; padding: 4px 0px 0px;">
+                                </div>
+                               <select name="people" required style=" width: 330px;">
+                                   <option value="">请选择用户</option>
+                                   @for(int i=0;i<Model.toUser.Count();i++)
+                                   {
+                                       <option value="@Model.toUser[i].UID 号用户 @Model.toUser[i].UName @Model.toUser[i].UIntroduction">@Model.toUser[i].UID 号用户 @Model.toUser[i].UName @Model.toUser[i].UIntroduction</option>
+                                   }
+                               </select>
+                            </div>
+                        </dd>
+                        <dt class="zm-form-table-head zm-form-table-head-align-middle">
+                            <label class="zg-medium-gray">内容：</label></dt>
+                        <dd class="zm-form-table-field zm-form-table-field-last">
+                            <div class="zg-editor-simple-wrap zg-form-text-input">
+                                <textarea name="content"
+                                    class="zg-editor-input zu-seamless-input-origin-element" style="font-weight: normal; white-space: pre; height: 66px; min-height: 66px;"></textarea>
+                            </div>
+                        </dd>
+                    </dl>
+                    <div class="zh-pm-warnmsg" style="text-align: right; color: rgb(195, 65, 47);"></div>
+                    <div class="zm-command zg-clear">
+                        <div class="zm-item-meta zg-left" style="margin: 0 0 0 57px;"><span class="zg-text-counter" style="display: none">还可以输入 500 字</span><span class="additional-info"></span></div>
+                        <a name="cancel" href="javascript:;" class="zm-command-cancel">取消</a>
+                        <input class="zg-btn-blue zg-r3px" type="submit" value="发送" id="submit" name="submit">
+                    </div>
+                    
+                </div>
+            </div>
+            <div class="modal-dialog-buttons" style="display: block;"></div>
+        </div>
+    </form>
+    <script>
+        $(".zg-btn-justify").click(function () {
+            $(".modal-dialog-bg").css("display", "block");
+            $(".modal-dialog.0").css("display", "block");
+            
+        })</script>
+    <script>  /* $(".modal-dialog-title-close")*/$('.zm-command-cancel').click(function () {
+       $(".modal-dialog-bg").css("display", "none");
+       $(".modal-dialog.0").css("display", "none");
+   })
+    </script>
+<div style="left:200px;position:absolute;">@Html.Partial("footer")</div>
+</body>
+</html>

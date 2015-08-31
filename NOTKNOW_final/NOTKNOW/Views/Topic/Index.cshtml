@@ -1,0 +1,215 @@
+﻿@model NOTKNOW.Controllers.FocusTopicModel
+@{
+    ViewBag.Title = "话题动态";
+}
+
+@section head
+{
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/jqueryval")
+<meta charset="utf-8" />
+
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="renderer" content="webkit" />
+
+<title>话题动态 - 你造嘛</title>
+
+<meta name="apple-itunes-app" content="app-id=432274380" />
+
+ <link rel="stylesheet" href="~/content/CSS/topview.css">
+
+
+<meta http-equiv="mobile-agent" content="format=html5;url=http://www.zhihu.com/topic">
+<meta id="znonce" name="znonce" content="f6a5c151df7b4ce99043a25d8002285e">
+<link rel="apple-touch-icon-precomposed" href="http://static.zhihu.com/static/img/ios/zhihu(57px).png" />
+<link rel="apple-touch-icon-precomposed" href="http://static.zhihu.com/static/img/ios/zhihu(72px).png" sizes="72x72" />
+<link rel="apple-touch-icon-precomposed" href="http://static.zhihu.com/static/img/ios/zhihu(76px).png" sizes="76x76" />
+<link rel="apple-touch-icon-precomposed" href="http://static.zhihu.com/static/img/ios/zhihu(114px).png" sizes="114x114" />
+<link rel="apple-touch-icon-precomposed" href="http://static.zhihu.com/static/img/ios/zhihu(120px).png" sizes="120x120" />
+<link rel="apple-touch-icon-precomposed" href="http://static.zhihu.com/static/img/ios/zhihu(152px).png" sizes="152x152" />
+
+
+<link rel="shortcut icon" href="http://static.zhihu.com/static/favicon.ico" type="image/x-icon">
+
+<link rel="search" type="application/opensearchdescription+xml" href="http://static.zhihu.com/static/search.xml" title="知乎" />
+<link rel="stylesheet" href="http://static.zhihu.com/static/ver/1a0898f7c45ce9f0fa253305fc3ec776.z.css">
+
+
+
+<!--[if lt IE 9]>
+<script src="http://static.zhihu.com/static/components/respond/dest/respond.min.js"></script>
+<link href="http://static.zhihu.com/static/components/respond/cross-domain/respond-proxy.html" id="respond-proxy" rel="respond-proxy" />
+<link href="/static/components/respond/cross-domain/respond.proxy.gif" id="respond-redirect" rel="respond-redirect" />
+<script src="/static/components/respond/cross-domain/respond.proxy.js"></script>
+<![endif]-->
+
+<script src="http://static.zhihu.com/static/ver/c18693016ee175f69ca64d8aac8f8d2b.instant.min.js"></script>
+
+}
+<body class="zhi">
+@Html.Action("topView", "index");
+
+<div class="zu-global-notify" id="zh-global-message" style="display:none">
+<div class="zg-wrap">
+<div class="zu-global-nitify-inner">
+<a class="zu-global-notify-close" href="javascript:;" title="关闭" name="close">x</a>
+<span class="zu-global-notify-icon"></span>
+<span class="zu-global-notify-msg"></span>
+</div>
+</div>
+</div>
+
+<div class="zg-wrap zu-main js-topic-feed-page topic-feed-page" style="padding-left:200px">
+<div class="zu-main-content">
+<div class="zu-main-content-inner">
+<div class="topic-feed-title">
+<i class="zg-icon zg-icon-feedlist"></i>
+<span>话题动态</span>
+<a href="/people/focusTopic?email=@Model.myUser.UEmail" class="zg-link-gray zg-right">
+<span class="">共关注 @Model.myUser.UFTopicNum 个话题</span>
+</a>
+</div>
+<div class="js-topic-feed-container topic-feed-container">
+<!-- feed item start -->
+@{
+    for (int i = 0; i < Model.focusTopic.Count(); i++)
+    {
+<div class="js-topic-item topic-item zg-clear" id="tf-68" data-id="68">
+<div class="topic-avatar">
+<a href="/topic/questions/@Model.focusTopic[i].topic.TID"><img class="topic-avatar-img" src="@Model.focusTopic[i].topic.TPhoto" alt=""></a></div>
+<div class="topic-item-content">
+<div>
+<h3 class="topic-item-title"><a class="topic-item-title-link" href="/topic/questions/@Model.focusTopic[i].topic.TID">@Model.focusTopic[i].topic.TContent</a>
+
+
+<a style="display:none" data-ajax="true" href="/follow/followTopic/@Model.focusTopic[i].topic.TID" 
+   class="@Model.focusTopic[i].topic.TID zg-right zg-gray unfollow topic-hover-content meta-item zg-follow">关注</a>
+<a data-ajax="true" style="display:block; background-color:rgba(255, 255, 0, 0.22)" href="/follow/_followTopic/@Model.focusTopic[i].topic.TID" 
+          class="@Model.focusTopic[i].topic.TID zg-right zg-gray unfollow topic-hover-content meta-item zg-unfollow">取消关注</a>
+
+<script>
+    $(".zg-follow.@Model.focusTopic[i].topic.TID").click(function () {
+        $(".zg-follow.@Model.focusTopic[i].topic.TID").css("display", "none");
+        $(".zg-unfollow.@Model.focusTopic[i].topic.TID").css("display", "block");
+    })
+</script>
+    <script>
+        $(".zg-unfollow.@Model.focusTopic[i].topic.TID").click(function () {
+            $(".zg-unfollow.@Model.focusTopic[i].topic.TID").css("display", "none");
+            $(".zg-follow.@Model.focusTopic[i].topic.TID").css("display", "block");
+        })
+</script>
+
+
+</h3>
+</div>
+<div class="topic-item-feed-digest">
+@{    
+    for (int j = 0; j < Model.focusTopic[i].question.Count() && j < 3; j++)
+    {
+<div class="topic-feed-item">
+<a href="/question/show/@Model.focusTopic[i].question[j].question.QID">@Model.focusTopic[i].question[j].question.QContent</a>
+<span class="zg-gray time">@Model.focusTopic[i].question[j].timespan</span>
+</div>
+    }
+}
+<a href="/topic/19550429" class="zg-link-litblue">查看全部 497 条动态&nbsp;»</a>
+
+</div>
+</div>
+</div>
+    }
+}
+
+<!-- feed item end -->
+</div>
+
+</div>
+</div>
+<div class="zu-main-sidebar">
+
+<h2 class="side-title">编辑推荐</h2>
+<div class="pinned-topics js-pinned-topics">
+
+<div data-topicid="10" class="js-pin-item side-topic-item" style="visibility: visible;">
+<a class="pin-topic-avatar-link" href="/topic/questions/10">
+<img src="/content/res/topic/10.jpg" alt="电影" class="js-topic-avatar side-topic-avatar">
+</a>
+<div class="side-topic-content ellipsis">
+<a href="/topic/questions/10" title="电影" class="topic-link" data-token="19550429" data-topicid="68">娱乐</a>
+<div class="side-topic-meta">
+<span class="zg-gray">电影</span>
+<span class="bull">•</span>
+<span class="zg-gray">音乐</span>
+<span class="bull">•</span>
+<span class="zg-gray">生活之美</span>
+</div>
+</div>
+</div>
+<div data-topicid="10" class="js-pin-item side-topic-item" style="visibility: visible;">
+<a class="pin-topic-avatar-link" href="/topic/questions/9">
+<img src="/content/res/topic/9.jpg" alt="电影" class="js-topic-avatar side-topic-avatar">
+</a>
+<div class="side-topic-content ellipsis">
+<a href="/topic/questions/9" title="电影" class="topic-link" data-token="19550429" data-topicid="68">运动</a>
+<div class="side-topic-meta">
+<span class="zg-gray">生命在于运动</span>
+</div>
+</div>
+</div>
+<div data-topicid="10" class="js-pin-item side-topic-item" style="visibility: visible;">
+<a class="pin-topic-avatar-link" href="/topic/questions/31">
+<img src="/content/res/topic/31.jpg" alt="电影" class="js-topic-avatar side-topic-avatar">
+</a>
+<div class="side-topic-content ellipsis">
+<a href="/topic/questions/31" title="电影" class="topic-link" data-token="19550429" data-topicid="68">人生</a>
+<div class="side-topic-meta">
+<span class="zg-gray">人到底应该怎样活着？</span>
+</div>
+</div>
+</div>
+<div data-topicid="10" class="js-pin-item side-topic-item" style="visibility: visible;">
+<a class="pin-topic-avatar-link" href="/topic/questions/32">
+<img src="/content/res/topic/32.jpg" alt="电影" class="js-topic-avatar side-topic-avatar">
+</a>
+<div class="side-topic-content ellipsis">
+<a href="/topic/questions/32" title="电影" class="topic-link" data-token="19550429" data-topicid="68">创意</a>
+<div class="side-topic-meta">
+<span class="zg-gray">程序猿的世界怎能缺少创意！</span>
+</div>
+</div>
+</div>
+
+
+</div>
+<div>
+<a href="/topic/topics" class="zm-topics-page-link zg-right">
+<i class="zg-icon zg-icon-sidenav-plaza"></i>话题广场
+</a>
+</div>
+</div>
+<div class="zg-clear"></div>
+</div>
+<div style="left:200px;position:absolute;">@Html.Partial("footer")</div>
+</body>
+@section script
+{
+<script type="text/json" class="json-inline" data-name="current_user">["\u7d2b\u8272\u98ce\u94c3","zi-se-feng-ling-67","http:\/\/pic1.zhimg.com\/5b8d23fd4_s.jpg","cadc3455fd59b14a2ce395cea6dcada0","",0,0,1,"wytthuss@126.com","http:\/\/www.126.com",1,false,false]</script>
+<script type="text/json" class="json-inline" data-name="env">["zhihu.com","comet.zhihu.com",false,null]</script>
+<script type="text/json" class="json-inline" data-name="permissions">[]</script>
+
+
+<script type="text/json" class="json-inline" data-name="ga_vars">{"user_created":1377582484000,"now":1406208067000,"abtest_mask":"---------1--------------------","user_attr":[1,0,0,"-","-"],"user_hash":"cadc3455fd59b14a2ce395cea6dcada0"}</script>
+
+<script src="http://static.zhihu.com/static/ver/be1f4e09e99650d8ff09ac81943bc61f.extern_src.min.js"></script>
+<script src="http://static.zhihu.com/static/ver/60f6e687053394d0ec104e06d1c50d80.app_core.js"></script>
+<script src="http://static.zhihu.com/static/ver/30bee34a30f42107cf3200aa0629c286.sign.js"></script>
+<script src="http://static.zhihu.com/static/ver/928607f392b00d3feda9c7fb5ebc0f8b.app.js"></script>
+<script src="http://static.zhihu.com/static/ver/46c6f900b1e2ffc13f9e966e40dba78d.rich_text_editor.js"></script>
+     <script src="/Scripts/topview.js"></script>
+<script type="text/zscript" znonce="f6a5c151df7b4ce99043a25d8002285e">
+ZH.entryTopicFeed();
+</script>
+}
+
+    

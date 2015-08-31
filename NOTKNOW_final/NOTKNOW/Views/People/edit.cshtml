@@ -1,0 +1,205 @@
+﻿@model NOTKNOW.Models.User
+
+<!DOCTYPE html>
+<html lang="zh-CN" dropeffect="none" class="no-js ">
+<head>
+    <meta charset="utf-8" />
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="renderer" content="webkit" />
+
+    <title>编辑个人资料 - 你造嘛</title>
+
+    <meta name="apple-itunes-app" content="app-id=432274380, app-argument=zhihu://people/xiao-ben-dan-11-72">
+     <link rel="stylesheet" href="~/content/CSS/topview.css">
+
+
+    <script type="text/javascript" src="http://ajax.microsoft.com/ajax/jquery/jquery-1.4.min.js"></script>
+    <meta http-equiv="mobile-agent" content="format=html5;url=http://www.zhihu.com/people/edit">
+    <meta id="znonce" name="znonce" content="6c83822a9726424db002796e4a640ae1">
+   
+
+    <link rel="shortcut icon" href="http://static.zhihu.com/static/favicon.ico" type="image/x-icon">
+
+    <link rel="search" type="application/opensearchdescription+xml" href="http://static.zhihu.com/static/search.xml" title="你造嘛" />
+    <link rel="stylesheet" href="~/content/CSS/people-index.css">
+
+    <script type="text/javascript" src="/Scripts/jquery-1-4.min.js"></script>
+
+    <!--[if lt IE 9]>
+<script src="http://static.zhihu.com/static/components/respond/dest/respond.min.js"></script>
+<link href="http://static.zhihu.com/static/components/respond/cross-domain/respond-proxy.html" id="respond-proxy" rel="respond-proxy" />
+<link href="/static/components/respond/cross-domain/respond.proxy.gif" id="respond-redirect" rel="respond-redirect" />
+<script src="/static/components/respond/cross-domain/respond.proxy.js"></script>
+<![endif]-->
+
+    <script src="/Scripts/instant-min.js"></script>
+
+    <style>
+        .zm-side-section + .zm-side-section {
+            margin: 20px 0 0 0;
+        }
+
+        .zm-profile-side-nav {
+            padding: 0;
+        }
+
+        .zm-profile-section-list .zm-item-answer-author-info .zm-item-link-avatar {
+            display: none;
+        }
+        /*弱化同类链接颜色*/
+        #zh-profile-answer-list .zm-item-answer-author-wrap a {
+            color: #222;
+        }
+    </style>
+
+</head>
+
+<body class="zhi">
+  @Html.Action("topView", "index");
+
+    <div class="zu-global-notify" id="zh-global-message" style="display: none">
+        <div class="zg-wrap">
+            <div class="zu-global-nitify-inner">
+                <a class="zu-global-notify-close" href="javascript:;" title="关闭" name="close">x</a>
+                <span class="zu-global-notify-icon"></span>
+                <span class="zu-global-notify-msg"></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="zg-wrap zu-main">
+        <div class="zu-main-content">
+            <div class="zu-main-content-inner" id="zh-pm-page-wrap" style="margin:0 100px 0 100px">
+
+
+
+                <form action="/people/PersonalPage" id="zm-profile-details-editform" class="zm-profile-details-editform" method="POST" novalidate="novalidate" enctype="multipart/form-data">
+                    <input type="hidden" name="_xsrf" value="b9ee8e6f259247ffa03b934609a3771e" />
+                    <div class="zm-profile-details zm-profile-mbox">
+                        <div class="zm-profile-module zg-clear">
+                            <a href="/people/index" class="zg-link-litblue zg-right">返回个人主页</a>
+                            <h2 class="zm-profile-mbox-title"><a href="/people/index">@Model.UName</a> &raquo; 编辑个人资料</h2>
+                        </div>
+
+                        <div class="zm-profile-module zg-clear zm-profile-details-editform-avatar">
+                            <h3>头像</h3>
+                            <div class="zm-profile-module-desc">
+                                <dl class="zm-form-table zm-form-table-wide" id="zh-avartar-edit-form">
+                                    <dt class="zm-form-table-head">
+                                        <img class="zg-avatar-big zm-avatar-editor-preview" id="uphoto" src="@Model.UPhoto">
+                                    </dt>
+                                    <dd class="zm-form-table-field">
+                                        <div aria-label="选择头像" class="zg-btn-blue profile-edit-avatar-btn"><div>选择头像</div>
+                                         <input type="file" name="fileToUpload" id="fileToUpload"  accept="image/*" style="opacity:0;width:100%;height:100%;position:absolute;left:0px;top:0px" class="zg-btn-blue profile-edit-avatar-btn"  />  </div>
+                                   
+                                        <div class='profile-edit-avatar-tip zg-gray'>支持 JPG、PNG、GIF 格式，不要超过 2M 。</div>
+                                    </dd>
+                                </dl>
+                            </div>
+                        </div>
+                       
+                        <div class="zm-profile-module zg-clear zm-profile-details-editform-desc">
+                            <h3>
+                                <label for="zm-profile-edit-description">个人简介</label></h3>
+                            <div class="zm-profile-module-desc">
+                                <fieldset class="zm-profile-edit-fieldset">
+                                    <div class="zm-editable-editor-wrap">
+                                        <div class="zm-editable-editor-outer">
+                                            <div class="zm-editable-editor-inner zg-form-text-input">
+
+                                                <textarea id="zm-profile-edit-description" class="zm-editable-editor-input" name="UIntroduction" >@Model.UIntroduction</textarea>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <p class="desc">用一段话介绍你自己，会在你的个人页面显示</p>
+                                </fieldset>
+                            </div>
+                        </div>
+                          <div class="zm-profile-module zg-clear">
+                            <h3>
+                                <label for="zm-profile-edit-loc">用户名</label></h3>
+                            <div class="zm-profile-module-desc editable-group">
+                                <fieldset class="zm-profile-edit-fieldset">
+                                    <span class="topic-input-wrap">
+                                        <input autocomplete="off" name="UName" value="@Model.UName" aria-haspopup="true" type="text" class="zg-form-text-input" placeholder="请输入新的用户名" /></span>
+
+                                </fieldset>
+                                <ul class="zm-profile-details-items" id="zm-profile-edit-loc-container">
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="zm-profile-module zg-clear">
+                            <h3>
+                                <label for="zm-profile-edit-loc">密码</label></h3>
+                            <div class="zm-profile-module-desc editable-group">
+                                <fieldset class="zm-profile-edit-fieldset">
+                                    <span class="topic-input-wrap">
+                                        <input autocomplete="off" aria-haspopup="true" type="password" name="oldPassword" class="zg-form-text-input" placeholder="请输入当前密码" /></span>
+
+                                </fieldset>
+                                <br />
+                               <fieldset class="zm-profile-edit-fieldset">
+                                    <span class="topic-input-wrap">
+                                        <input autocomplete="off" aria-haspopup="true" type="password" name="newPassword" class="zg-form-text-input" placeholder="请输入修改后的密码" /></span>
+                                </fieldset>
+                                <br />
+                                <fieldset class="zm-profile-edit-fieldset">
+                                    <span class="topic-input-wrap">
+                                        <input autocomplete="off" aria-haspopup="true" type="password" name="confirmPassword" class="zg-form-text-input" placeholder="请再次输入修改后的密码" /></span>
+
+                                </fieldset>
+                                <div style="text-align: left; color: red">@TempData["info"]</div>
+                            </div>
+                        </div>
+                        <div class="zm-profile-module zg-clear">
+                            <h3>
+                                <label for="zm-profile-edit-loc">所在行业</label></h3>
+                            <div class="zm-profile-module-desc">
+                                 <fieldset class="zm-profile-edit-fieldset">
+                                    <span class="topic-input-wrap">
+                                        <input autocomplete="off" aria-haspopup="true" value="@Model.UCareer"  type="text" name="UCareer" class="zg-form-text-input" placeholder="请输入你的行业" /></span>
+
+                                    <p class="desc">行业信息会显示在你的个人页面</p>
+                                </fieldset>
+                            </div>
+                        </div>
+                
+                        <div class="zm-profile-module zg-clear zm-profile-details-editform-footer">
+                            <p>
+                               <button class="zg-btn-blue" type="submit" id="zm-profile-edit-submit">保存设置</button>
+                                <a class="zg-gray-normal" href="/people/index" id="zm-profile-edit-cancel">取消修改</a>
+                            </p>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+
+        <div class="zg-clear"></div>
+    </div>
+
+
+    <script type="text/json" class="json-inline" data-name="current_user">["\u5c0f\u7b28\u86cb","xiao-ben-dan-11-72","http:\/\/pic3.zhimg.com\/295607bc5_s.jpg","3d1fff2b93afca8839b1a9424e52e509","\u592a\u7b28",1,1,1,"slf12thuss@163.com","http:\/\/mail.163.com",1,true,false]</script>
+    <script type="text/json" class="json-inline" data-name="env">["zhihu.com","comet.zhihu.com",false,null]</script>
+    <script type="text/json" class="json-inline" data-name="permissions">[]</script>
+
+
+    <script type="text/json" class="json-inline" data-name="ga_vars">{"user_created":1405756277000,"now":1406172746000,"abtest_mask":"---------0--------------------","user_attr":[1,0,0,"-",1],"user_hash":"3d1fff2b93afca8839b1a9424e52e509"}</script>
+
+    <script src="/Scripts/instant-min.js"></script>
+    <script src="/Scripts/app-core.js"></script>
+    <script src="/Scripts/sign.js"></script>
+    <script src="/Scripts/app.js"></script>
+    <script src="/Scripts/text-editor.js"></script>
+     <script src="~/Scripts/xl.js"></script>
+    <script src="~/Scripts/myown.js"></script>
+    <script src="~/Scripts/topview.js"></script>
+    <script type="text/zscript" znonce="6c83822a9726424db002796e4a640ae1">
+    ZH.entryP();</script>
+
+    <input type="hidden" name="_xsrf" value="b9ee8e6f259247ffa03b934609a3771e" />
+</body>
+</html>

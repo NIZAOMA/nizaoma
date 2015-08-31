@@ -1,0 +1,352 @@
+﻿@model NOTKNOW.Controllers.UserModel
+@section scripts
+{
+    <script src="@Url.Content("~/Scripts/jquery.unobtrusive-ajax.js")"></script>
+}
+<div role="navigation" class="zu-top">
+    <div class="zg-wrap" id="zh-top-inner">
+        <a href="/" class="zu-top-link-logo" id="zh-top-link-logo" style="background-image: url(/content/res/new_logo.png);">你造嘛</a>
+
+        <div class="top-nav-profile">
+            <a href="/people/index" class="zu-top-nav-userinfo " id=":0" role="button" aria-haspopup="true" aria-activedescendant="">
+                <span class="name">@Model.myUser.UName</span>
+                <img class="avatar" src="@Model.myUser.UPhoto">
+                <span id="zh-top-nav-new-pm" class="zg-noti-number zu-top-nav-pm-count" style="visibility: hidden" data-count="0"></span>
+            </a>
+            <ul class="top-nav-dropdown" id="top-nav-profile-dropdown" aria-labelledby=":0">
+                <li>
+                    <a href="/people/index" tabindex="-1" id=":1">
+                        <i class="zg-icon zg-icon-dd-home"></i>我的主页
+                    </a>
+                </li>
+
+                <li>
+                    <a href="/message" tabindex="-1" id=":2">
+                        <i class="zg-icon zg-icon-dd-pm"></i>私信
+                            <span id="zh-top-nav-pm-count" class="zu-top-nav-pm-count zg-noti-number" style="visibility: hidden" data-count="0"></span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/index/logout" tabindex="-1" id=":4">
+                        <i class="zg-icon zg-icon-dd-logout"></i>退出
+                    </a>
+                </li>
+            </ul>
+
+        </div>
+        <div role="search" id="zh-top-search" class="zu-top-search">
+            <form method="GET" action="/search/questionSearch" id="zh-top-search-form" class="zu-top-search-form form-with-magnify">
+
+                <input type="text" class="zu-top-search-input" id="q" name="q" autocomplete="off" value="@ViewBag.searchContent" placeholder="搜索话题、问题或人..." aria-haspopup="true">
+                <input type="hidden" name="type" value="question">
+                <label for="q" class="hide-text">你造嘛搜索</label>
+                <button type="submit" class="magnify-button">
+                    <img src="/Content/res/search.jpg"></button>
+            </form>
+            <button class="zu-top-add-question" id="zu-top-add-question" onclick="getQuestion()">提问</button>
+        </div>
+        <div id="zg-top-nav" class="zu-top-nav">
+            <ul class="zu-top-nav-ul zg-clear">
+
+                <li class="zu-top-nav-li " id="zh-top-home-link">
+                    <a class="zu-top-nav-link" href="/index" id="zh-top-link-home">首页</a>
+                </li>
+                <li class="top-nav-topic-selector zu-top-nav-li " id="zh-top-nav-item-topic">
+                    <a class="zu-top-nav-link" href="/topic" id="top-nav-dd-topic">话题</a>
+
+                </li>
+                <li class="zu-top-nav-li ">
+                    <a class="zu-top-nav-link" href="/explore">发现</a>
+                </li>
+                @if(Model.myUser.IsAdmin == true)
+                {
+                <li class="zu-top-nav-li ">
+                    <a class="zu-top-nav-link" href="/Admin/Index">管理</a>
+                </li>
+                }
+            </ul>
+        </div>
+    </div>
+    <div id="firstQuestion1"></div>
+    <div id="firstQuestion">
+        <div class="modal-dialog absolute-position" tabindex="0" role="dialog" aria-labelledby=":28" style="width: 550px; left: 398.5px; top: 1.5px;">
+            <div class="modal-dialog-title modal-dialog-title-draggable" id=":28"><span class="modal-dialog-title-text">提问</span><span class="modal-dialog-title-close" id="span-cancelQuestion"></span></div>
+            <div class="modal-dialog-content">
+                <div class="zh-add-question-form">
+                    <div class="js-add-question-splash add-question-splash-page" style="display: block;">
+                        <p>
+                            你造嘛是一个真诚、友善、认真、互助的社区<br>
+                            我们希望每一个疑惑都有解答，好的问题更容易得到好答案 <a href="//www.zhihu.com/question/19555761">如何提一个好问题？</a>
+                        </p>
+                        <p>
+                            <b>提问应遵循真实、客观、简洁、明确、规范的原则</b><br>
+                            1、提问应尽可能简洁明了，避免「请问」「有谁知道」「谢谢！」等与问题本身无关的附加语。<br>
+                            2、应避免使用「为神马」「童鞋」「肿么办」等网络用语。<br>
+                            3、基于个人判断或传言的问题，在提问时应在补充说明里详细说明原由<br>
+                            4、避免太宽泛问题，如调查性的问题容易变成每个人都可以发表观点，但对其他人没有价值。<br>
+                        </p>
+                        <p>
+                            <b>你造嘛禁止这些提问</b><br>
+                            1、和已有问题完全重复的问题，<b>为避免重复，提问前可以先进行搜索</b><br>
+                            2、招聘 / 求职、交易 / 合作、寻人 / 征友、召集 / 赠送、求码类内容<br>
+                            3、投票类问题。例如：你支持方舟子还是韩寒？<br>
+                            4、作业或其他希望代为完成个人任务类的内容，以及针对个人具体病情的求医问药类问题<br>
+                            完整的提问建议可查看 <a href="//www.zhihu.com/question/19806261">你造嘛的提问规范有哪些？</a><br>
+                        </p>
+                        <!--
+                        <div class="before-ask-form"><b>提问前请先搜索</b><div style="position: relative; margin-top: 18px;">
+                            <input type="text" class="zg-form-text-input" id="js-before-ask" placeholder="请输入你的问题" aria-haspopup="true" autocomplete="off"></div>
+                        </div>-->
+                        <center><a class="zg-btn-blue" id="startAsk">开始提问</a></center>
+                    </div>
+
+                    <form class="js-add-question-form" style="display: none;" action="/question/question" method="post">
+                        <div class="zg-section-big clearfix">
+                            <div id="zm-modal-dialog-info-wrapper"></div>
+                            <div style="display: none; position: relative;" id="zm-modal-dialog-warnmsg-wrapper">
+                                <div class="zm-modal-dialog-warnmsg zm-modal-dialog-guide-warn-message zg-r5px">您还没有给问题添加问号</div>
+
+                            </div>
+                            <div class="zg-form-text-input add-question-title-form" style="position: relative;">
+
+                                <textarea required name="QContent" class="zg-editor-input zu-seamless-input-origin-element" title="在这里输入问题" id="zh-question-suggest-title-content" placeholder="写下你的问题（最多50个字符,超出后将不再接受输入)" autocomplete="off" style="white-space: pre; height: 66px; min-height: 22px;" maxlength="50"></textarea>
+                            </div>
+
+
+                            <span id="js-title-length-err-msg" class="title-length-err-msg zg-right" style="display: none;">您的问题字数有点少吧</span>
+                            <div id="zh-question-suggest-ac-wrap" class="question-suggest-ac-wrap">
+                                <div class="ac-renderer" role="listbox" id=":29" style="-webkit-user-select: none; display: none;">
+                                    <div class="ac-head zg-gray">你的问题可能已经有答案</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="zg-section-big">
+
+
+                            <div id="zh-question-suggest-detail-container" class="zm-editable-status-editing">
+                                <div class="zm-editable-content" data-disabled="1" style="display: none;">&nbsp;</div>
+
+                                <div class="comment">
+                                    <textarea type="hidden" id="QDescription" name="QDescription" style="display: none"></textarea>
+                                    <div id="saytext" contenteditable="true" style="height: auto !important; min-height: 200px" class="zg-form-text-input add-question-title-form"></div>
+
+                                    <span class="emotion">表情</span>
+                                    <div id="facebox" style="position: relative; z-index: 1000; top: 5px; left: 0px; display: none" class="qqFace">
+                                        <table border="0" cellspacing="0" cellpadding="0">
+                                            <tbody>
+                                                <tr>
+                                                    <td>
+                                                        <img src="~/content/arclist/1.gif" onclick="show(1)"></td>
+                                                    <td>
+                                                        <img src="~/content/arclist/2.gif" onclick="show(2)"></td>
+                                                    <td>
+                                                        <img src="~/content/arclist/3.gif" onclick="show(3)"></td>
+                                                    <td>
+                                                        <img src="~/content/arclist/4.gif" onclick="show(4)"></td>
+                                                    <td>
+                                                        <img src="~/content/arclist/5.gif" onclick="show(5)"></td>
+                                                    <td>
+                                                        <img src="~/content/arclist/6.gif" onclick="show(6)"></td>
+                                                    <td>
+                                                        <img src="~/content/arclist/7.gif" onclick="show(7)"></td>
+                                                    <td>
+                                                        <img src="~/content/arclist/8.gif" onclick="show(8)"></td>
+                                                    <td>
+                                                        <img src="~/content/arclist/9.gif" onclick="show(9)"></td>
+                                                    <td>
+                                                        <img src="~/content/arclist/10.gif" onclick="show(10)"></td>
+                                                    <td>
+                                                        <img src="~/content/arclist/11.gif" onclick="show(11)"></td>
+                                                    <td>
+                                                        <img src="~/content/arclist/12.gif" onclick="show(12)"></td>
+                                                    <td>
+                                                        <img src="~/content/arclist/13.gif" onclick="show(13)"></td>
+                                                    <td>
+                                                        <img src="~/content/arclist/14.gif" onclick="show(14)"></td>
+                                                    <td>
+                                                        <img src="~/content/arclist/15.gif" onclick="show(15)"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <img src="~/content/arclist/16.gif" onclick="show(16)"></td>
+                                                    <td>
+                                                        <img src="~/content/arclist/17.gif" onclick="show(17)"></td>
+                                                    <td>
+                                                        <img src="~/content/arclist/18.gif" onclick="show(18)"></td>
+                                                    <td>
+                                                        <img src="~/content/arclist/19.gif" onclick="show(19)"></td>
+                                                    <td>
+                                                        <img src="~/content/arclist/20.gif" onclick="show(20)"></td>
+                                                    <td>
+                                                        <img src="~/content/arclist/21.gif" onclick="show(21)"></td>
+                                                    <td>
+                                                        <img src="~/content/arclist/22.gif" onclick="show(22)"></td>
+                                                    <td>
+                                                        <img src="~/content/arclist/23.gif" onclick="show(23)"></td>
+                                                    <td>
+                                                        <img src="~/content/arclist/24.gif" onclick="show(24)"></td>
+                                                    <td>
+                                                        <img src="~/content/arclist/25.gif" onclick="show(25)"></td>
+                                                    <td>
+                                                        <img src="~/content/arclist/26.gif" onclick="show(26)"></td>
+                                                    <td>
+                                                        <img src="~/content/arclist/27.gif" onclick="show(27)"></td>
+                                                    <td>
+                                                        <img src="~/content/arclist/28.gif" onclick="show(28)"></td>
+                                                    <td>
+                                                        <img src="~/content/arclist/29.gif" onclick="show(29)"></td>
+                                                    <td>
+                                                        <img src="~/content/arclist/30.gif" onclick="show(30)"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <img src="~/content/arclist/31.gif" onclick="show(31)"></td>
+                                                    <td>
+                                                        <img src="~/content/arclist/32.gif" onclick="show(32)"></td>
+                                                    <td>
+                                                        <img src="~/content/arclist/33.gif" onclick="show(33)"></td>
+                                                    <td>
+                                                        <img src="~/content/arclist/34.gif" onclick="show(34)"></td>
+                                                    <td>
+                                                        <img src="~/content/arclist/35.gif" onclick="show(35)"></td>
+                                                    <td>
+                                                        <img src="~/content/arclist/36.gif" onclick="show(36)"></td>
+                                                    <td>
+                                                        <img src="~/content/arclist/37.gif" onclick="show(37)"></td>
+                                                    <td>
+                                                        <img src="~/content/arclist/38.gif" onclick="show(38)"></td>
+                                                    <td>
+                                                        <img src="~/content/arclist/39.gif" onclick="show(39)"></td>
+                                                    <td>
+                                                        <img src="~/content/arclist/40.gif" onclick="show(40)"></td>
+                                                    <td>
+                                                        <img src="~/content/arclist/41.gif" onclick="show(41)"></td>
+                                                    <td>
+                                                        <img src="~/content/arclist/42.gif" onclick="show(42)"></td>
+                                                    <td>
+                                                        <img src="~/content/arclist/43.gif" onclick="show(43)"></td>
+                                                    <td>
+                                                        <img src="~/content/arclist/44.gif" onclick="show(44)"></td>
+                                                    <td>
+                                                        <img src="~/content/arclist/45.gif" onclick="show(45)"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <img src="~/content/arclist/46.gif" onclick="show(46)"></td>
+                                                    <td>
+                                                        <img src="~/content/arclist/47.gif" onclick="show(47)"></td>
+                                                    <td>
+                                                        <img src="~/content/arclist/48.gif" onclick="show(48)"></td>
+                                                    <td>
+                                                        <img src="~/content/arclist/49.gif" onclick="show(49)"></td>
+                                                    <td>
+                                                        <img src="~/content/arclist/50.gif" onclick="show(50)"></td>
+                                                    <td>
+                                                        <img src="~/content/arclist/51.gif" onclick="show(51)"></td>
+                                                    <td>
+                                                        <img src="~/content/arclist/52.gif" onclick="show(52)"></td>
+                                                    <td>
+                                                        <img src="~/content/arclist/53.gif" onclick="show(53)"></td>
+                                                    <td>
+                                                        <img src="~/content/arclist/54.gif" onclick="show(54)"></td>
+                                                    <td>
+                                                        <img src="~/content/arclist/55.gif" onclick="show(55)"></td>
+                                                    <td>
+                                                        <img src="~/content/arclist/56.gif" onclick="show(56)"></td>
+                                                    <td>
+                                                        <img src="~/content/arclist/57.gif" onclick="show(57)"></td>
+                                                    <td>
+                                                        <img src="~/content/arclist/58.gif" onclick="show(58)"></td>
+                                                    <td>
+                                                        <img src="~/content/arclist/59.gif" onclick="show(59)"></td>
+                                                    <td>
+                                                        <img src="~/content/arclist/60.gif" onclick="show(60)"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <img src="~/content/arclist/61.gif" onclick="show(61)"></td>
+                                                    <td>
+                                                        <img src="~/content/arclist/62.gif" onclick="show(62)"></td>
+                                                    <td>
+                                                        <img src="~/content/arclist/63.gif" onclick="show(63)"></td>
+                                                    <td>
+                                                        <img src="~/content/arclist/64.gif" onclick="show(64)"></td>
+                                                    <td>
+                                                        <img src="~/content/arclist/65.gif" onclick="show(65)"></td>
+                                                    <td>
+                                                        <img src="~/content/arclist/66.gif" onclick="show(66)"></td>
+                                                    <td>
+                                                        <img src="~/content/arclist/67.gif" onclick="show(67)"></td>
+                                                    <td>
+                                                        <img src="~/content/arclist/68.gif" onclick="show(68)"></td>
+                                                    <td>
+                                                        <img src="~/content/arclist/69.gif" onclick="show(69)"></td>
+                                                    <td>
+                                                        <img src="~/content/arclist/70.gif" onclick="show(70)"></td>
+                                                    <td>
+                                                        <img src="~/content/arclist/71.gif" onclick="show(71)"></td>
+                                                    <td>
+                                                        <img src="~/content/arclist/72.gif" onclick="show(72)"></td>
+                                                    <td>
+                                                        <img src="~/content/arclist/73.gif" onclick="show(73)"></td>
+                                                    <td>
+                                                        <img src="~/content/arclist/74.gif" onclick="show(74)"></td>
+                                                    <td>
+                                                        <img src="~/content/arclist/75.gif" onclick="show(75)"></td>
+                                                </tr>
+                                                <tr></tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+
+                                </div>
+
+                            </div>
+                            </div>
+                            <div class="zm-add-question-form-topic-wrap">
+                                <div class="add-question-section-title"><span class="zg-gray zg-right hidden-phone">话题越精准，越容易让领域专业人士看到你的问题</span>选择话题：<span id="zh-question-form-tag-err"></span></div>
+                                <div id="zh-question-suggest-topic-container" class="zm-tag-editor zg-section">
+                                    <fieldset class="zm-profile-edit-fieldset">
+                                        <select name="topicSelect" required>
+                                             @for(int i=0;i<Model.topics.ToList().Count();i++)
+                                             {
+                                                  <option value="@Model.topics.ToList()[i].TContent">@Model.topics.ToList()[i].TContent</option>
+                                             }
+                                        </select>
+                                    </fieldset>
+                                </div>
+                                <div class="sug-con zg-clear" style="display: none;"><span class="zg-gray-normal zg-left tip">推荐添加</span><span class="sugs zg-clear zg-inline"></span><img src="http://static.zhihu.com/static/img/spinner2.gif" style=""></div>
+                            </div>
+                            <div class="zm-command">
+                                <label class="zm-question-form-hide-in-about-question-el zg-left">
+                                    <input type="checkbox" value="1" class="zg-addq-isanon">匿名<span class="zm-question-form-split">&nbsp;</span></label><div class="zg-left zm-add-question-form-sns-wrap"><span>分享到</span><span class="goog-checkbox goog-checkbox-unchecked icon sina" aria-checked="false" role="checkbox" tabindex="0" title="分享到新浪微博" data-tip="s$b$分享到新浪微博" style="-webkit-user-select: none;"></span></div>
+                                <a href="" name="cancel" class="zm-command-cancel" id="cancelQuestion">取消</a>
+                                <button type="submit" name="addq" class="zg-r5px zu-question-form-add zg-btn-blue" onclick="text()">发布</button><a name="jumpq" class="zg-r5px zg-btn-blue zu-question-form-jump" style="display: none;">查看问题</a>
+                            </div>
+                           
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+ <script>
+    $(".zu-top-link-logo").css("background-image", "url('/content/res/new_logo.png')");
+</script> 
+<script type="text/javascript">
+    //TODO:需要测试，最新消息每10秒刷新一次
+    setInterval(function () {
+        $.ajax({
+            url: '@Url.Action("isNew", "Message")', //异步请求Action
+             data: "num=@Model.myUser.UMessageNum",
+             type: "POST",
+             success: function (result) {
+                 if (result == "1")//有新消息
+                     $(".zu-top-nav-count.zg-noti-number").css("display", "block");
+                 else
+                     $(".zu-top-nav-count.zg-noti-number").css("display", "none");
+                 console.log(result);
+             }
+         });
+     }, 10000);
+ </script>

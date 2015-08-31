@@ -1,0 +1,49 @@
+﻿@model NOTKNOW.Controllers.CtoA
+@{
+    ViewBag.Title = "comment";
+}
+
+
+<div id="@Model.aID" class="zm-comment-list">
+ @using (Ajax.BeginForm("update", "comment", 
+            new{id = Model.aID },
+            new AjaxOptions { HttpMethod = "post", UpdateTargetId = Model.aID.ToString() }
+           )) 
+{
+    for (var j = 0; j < Model.comments.Count(); j++)
+ {
+        
+<div class="zm-item-comment @Model.comments.ToList()[j].CID">
+        <a class="zg-anchor-hidden" name="comment-58341547"></a>
+        <a title="紫色风铃" data-tip="p$t$zi-se-feng-ling-67" class="zm-item-link-avatar"      href="/people/_index?email=@Model.users.ToList()[j].UEmail">
+        <img src="@Model.users.ToList()[j].UPhoto" class="zm-item-img-avatar">
+        </a>
+        <div class="zm-comment-content-wrap">
+            <div class="zm-comment-hd">
+                <a data-tip="p$t$zi-se-feng-ling-67" href="/people/_index?email=@Model.users.ToList()[j].UEmail" 
+                    class="zg-link" title="紫色风铃">@Model.users.ToList()[j].UName</a>
+                <span class="desc"></span>
+            </div>
+            <div class="zm-comment-content">
+                @Model.comments.ToList()[j].CContent    </div>
+            <div class="zm-comment-ft">
+            <span class="date">@Model.comments.ToList()[j].CTime</span>
+ @if(Model.uID == Model.comments.ToList()[j].CUserID)
+ {               <a data-ajax="true" href="/comment/delete/@Model.comments.ToList()[j].CID" class="del zm-comment-op-link needsfocus" name="delcomment">
+                    <i class="zg-icon zg-icon-comment-del"></i>删除</a>
+ }
+            </div>
+        </div>
+    </div>
+    
+ } 
+ <div class="zm-comment-form zm-comment-box-ft expanded">
+    <input name="comment" class="zm-comment-editable editable" style="width: 490px;">
+    <div class="zm-command zg-clear">
+        <button type="submit" class="zg-right zg-btn-blue">评论</button>
+    </div>
+</div>
+}
+
+</div>
+    
